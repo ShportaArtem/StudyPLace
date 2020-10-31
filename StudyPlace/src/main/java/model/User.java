@@ -13,7 +13,7 @@ public class User implements Serializable{
 	
 	private int id;
 	
-	private int infoId;
+	private Integer infoId;
 	
 	private int roleId;
 	
@@ -34,11 +34,11 @@ public class User implements Serializable{
 		this.id = id;
 	}
 
-	public int getInfoId() {
+	public Integer getInfoId() {
 		return infoId;
 	}
 
-	public void setInfoId(int infoId) {
+	public void setInfoId(Integer infoId) {
 		this.infoId = infoId;
 	}
 
@@ -82,12 +82,14 @@ public class User implements Serializable{
 		this.surname = surname;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + infoId;
+		result = prime * result + ((infoId == null) ? 0 : infoId.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -107,7 +109,10 @@ public class User implements Serializable{
 		User other = (User) obj;
 		if (id != other.id)
 			return false;
-		if (infoId != other.infoId)
+		if (infoId == null) {
+			if (other.infoId != null)
+				return false;
+		} else if (!infoId.equals(other.infoId))
 			return false;
 		if (login == null) {
 			if (other.login != null)

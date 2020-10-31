@@ -1,5 +1,4 @@
 <%@ page import="java.util.*" %>
-<%@ page import="modelView.*" %>
 <%@ page import="model.*" %>
 <%@page import="javax.servlet.jsp.jstl.core.Config"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>

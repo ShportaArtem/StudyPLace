@@ -8,6 +8,6 @@
 		defaultAutoCommit="false"
 		defaultTransactionIsolation="READ_COMMITTED"
 		connectionProperties="useUnicode=yes;characterEncoding=utf8;"
-		url="jdbc:mysql://localhost:3306/autobasedb?useUnicode=true&amp;serverTimezone=UTC"/>
+		url="jdbc:mysql://localhost:3306/studyplacedb?useUnicode=true&amp;serverTimezone=UTC"/>
 
 </Context>

@@ -70,7 +70,7 @@
 		</init-param>
 		<init-param>
 			<param-name>out-of-control</param-name>
-			<param-value>login</param-value>
+			<param-value>login getRegistration getSignIn registration getProfile updateProfile getUpdateProfile getMain</param-value>
 		</init-param>
 	</filter>
 	

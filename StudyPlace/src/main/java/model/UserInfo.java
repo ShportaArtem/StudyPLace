@@ -64,8 +64,8 @@ public class UserInfo implements Serializable{
 		return picture;
 	}
 
-	public void setPicture(Blob picture) {
-		this.picture = picture;
+	public void setPicture(Blob blob) {
+		this.picture = blob;
 	}
 	
 	public String getEmail() {

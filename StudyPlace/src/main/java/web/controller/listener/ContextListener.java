@@ -13,16 +13,21 @@ import org.apache.log4j.PropertyConfigurator;
 
 import db.DBManager;
 import db.exception.DBException;
+import db.repository.UserInfoRep;
 import db.repository.UserRep;
 import service.LoginService;
+import service.ProfileService;
 import service.RegistrationService;
 import web.command.http.HttpCommandDispatcher;
 import web.command.http.get.DefaultCommand;
 import web.command.http.get.GetMainCommand;
+import web.command.http.get.GetProfileCommand;
 import web.command.http.get.GetRegistrationCommand;
 import web.command.http.get.GetSignInCommand;
+import web.command.http.get.GetUpdateProfileCommand;
 import web.command.http.post.LoginCommand;
 import web.command.http.post.RegistrationCommand;
+import web.command.http.post.UpdateProfileCommand;
 
 
 /**
@@ -94,9 +99,11 @@ public class ContextListener implements ServletContextListener {
 		}
 		
 		UserRep userRep = new UserRep();
+		UserInfoRep userInfoRep = new UserInfoRep();
 		
 		LoginService loginService = new LoginService(dbManager, userRep);
 		RegistrationService registrServ = new RegistrationService(dbManager, userRep);
+		ProfileService profileService = new ProfileService(dbManager,userInfoRep, userRep);
 		
 		HttpCommandDispatcher dispatcher = new HttpCommandDispatcher(new DefaultCommand());
 		
@@ -105,6 +112,9 @@ public class ContextListener implements ServletContextListener {
 		dispatcher.addCommand("getSignIn", new GetSignInCommand());
 		dispatcher.addCommand("getMain", new GetMainCommand());
 		dispatcher.addCommand("registration", new RegistrationCommand(registrServ));
+		dispatcher.addCommand("getProfile", new GetProfileCommand(loginService, profileService));
+		dispatcher.addCommand("getUpdateProfile", new GetUpdateProfileCommand(loginService, profileService));
+		dispatcher.addCommand("updateProfile", new UpdateProfileCommand(profileService));
 		
 		context.setAttribute("dispatcher", dispatcher);
 		

@@ -5,8 +5,7 @@
             <img src="view/img/autologo.png" class="img" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" >
             <strong>StudyPlace</strong>
           </a>
-          <a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="/StudyPlace/Controller?command=getSignIn">Sign in</a>
-          
+          <a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="/StudyPlace/Controller?command=getProfile">Profile</a>
         </div>
       </div>
     </header>

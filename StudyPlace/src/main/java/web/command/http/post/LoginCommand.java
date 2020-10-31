@@ -65,7 +65,7 @@ public class LoginCommand implements Command {
 		}
 		}
 		Integer userRole = user.getRoleId();
-			forward = Path.PAGE_MAIN;
+			forward = Path.PAGE_MAIN_POST;
 
 		CommandResult cr = new HttpCommandResult(RequestType.POST, forward);
 

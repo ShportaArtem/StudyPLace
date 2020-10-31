@@ -15,7 +15,6 @@ import db.exception.Messages;
 /**
  * DB manager. Works with Apache Derby DB. 
  * 
- * @author A.Shporta
  * 
  */
 public class DBManager {

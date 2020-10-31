@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +27,9 @@ public class UserRep {
 	private static final String SQL_DELETE_USER = "DELETE FROM users WHERE id=?";
 	private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE username=?";
 	private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
-	private static final String SQL_UPDATE_USER_BY_ID = "UPDATE users SET login=?, password=?, name=?, surname=? WHERE id=?";
-	
+	private static final String SQL_UPDATE_USER_BY_ID = "UPDATE users SET username=?,  name=?, sername=? WHERE ID=?";
+	private static final String SQL_UPDATE_USER_BY_ID_WITH_ID = "UPDATE users SET username=?,  name=?, sername=?, InfoID=? WHERE ID=?";
+
 	/**
 	 * Returns all users.
 	 * 
@@ -70,7 +72,6 @@ public class UserRep {
 
 			int k = 1;
 			pstmt.setString(k++, user.getLogin());
-			pstmt.setString(k++, user.getPassword());
 			pstmt.setString(k++, user.getName());
 			pstmt.setString(k++, user.getSurname());
 			pstmt.setInt(k++, user.getId());
@@ -88,11 +89,37 @@ public class UserRep {
 
 		return res;
 	}
-	/**
-	 * Returns all users by role id.
-	 * 
-	 * @return List of user models.
-	 */
+	
+	public boolean updateUserByIdWithUserInfo(Connection con, User user, int userInfoId) throws SQLException { 
+		boolean res = false;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = con.prepareStatement(SQL_UPDATE_USER_BY_ID_WITH_ID, Statement.RETURN_GENERATED_KEYS);
+
+			int k = 1;
+			pstmt.setString(k++, user.getLogin());
+			pstmt.setString(k++, user.getName());
+			pstmt.setString(k++, user.getSurname());
+			pstmt.setInt(k++, userInfoId);
+			pstmt.setInt(k++, user.getId());
+			
+			if (pstmt.executeUpdate() > 0) {
+				rs = pstmt.getGeneratedKeys();
+				if (rs.next()) {
+					res = true;
+				}
+			}
+		} finally {
+			DBUtils.close(rs);
+			DBUtils.close(pstmt);
+		}
+
+		return res;
+	}
+	
 	public List<User> findAllUsersByRoleId(Connection con, Integer roleId) throws SQLException, NoSuchAlgorithmException {
 		List<User> users = new ArrayList<>();
 
@@ -161,7 +188,7 @@ public class UserRep {
 		user.setLogin(rs.getString("username"));
 		user.setPassword(rs.getString("Password"));
 		user.setName(rs.getString("name"));
-		user.setSurname(rs.getString("surname"));
+		user.setSurname(rs.getString("sername"));
 		return user;
 	}
 	
@@ -183,10 +210,10 @@ public class UserRep {
 			pstmt.setString(k++, user.getLogin());
 			pstmt.setString(k++, user.getName());
 			pstmt.setString(k++, user.getSurname());
-			pstmt.setInt(k++, user.getInfoId());
+			pstmt.setNull(k++, Types.INTEGER);
 			pstmt.setInt(k++, user.getRoleId());
 			pstmt.setString(k++, user.getPassword());
-
+			System.out.println(pstmt.toString());
 			if (pstmt.executeUpdate() > 0) {
 				rs = pstmt.getGeneratedKeys();
 				if (rs.next()) {

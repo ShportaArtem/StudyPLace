@@ -54,7 +54,7 @@ private static Logger LOG = Logger.getLogger(LoginCommand.class);
 		user.setSurname(request.getParameter("surnameUser"));
 		LOG.trace("Found in request parameters: surname --> " + user.getSurname());
 		
-		user.setInfoId(0);
+		user.setInfoId(null);
 		
 		registrServ.insertUser(user);
 		LOG.trace("Insert in DB user --> " + user);
@@ -62,6 +62,7 @@ private static Logger LOG = Logger.getLogger(LoginCommand.class);
 		CommandResult cr = new HttpCommandResult(RequestType.POST,Path.PAGE_MAIN_POST);
 		int methodMain = 2;
 		session.setAttribute("methodMain", methodMain);
+		session.setAttribute("user", user);
 		LOG.trace("Set the session attribute: methodMain --> " + methodMain);
 		
 		LOG.debug("Commands finished");

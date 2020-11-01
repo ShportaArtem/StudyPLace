@@ -5,11 +5,11 @@
 <%@ include file="/view/jspf/head2.jspf"%>
 <body class="bg-secondary">
 
-	<%@ include file="/view/jspf/header3.jspf"%>
-	<div class="container mt-sm-5 " style="width: 30%;">
-		<div class="jumbotron jumbotron-liquid pt-3" style="height: 608px;">
+	<%@ include file="/view/jspf/header1.jspf"%>
+	<div class="container mt-sm-5 " style="width: 20%;">
+		<div class="jumbotron jumbotron-liquid pt-3" style="height: 308px;">
 			<form id="login_form" action="Controller" method="post">
-				<input type="hidden" name="command" value="registration" />
+				<input type="hidden" name="command" value="login" />
 				<div class="form-group">
 					<label for="login" style="color: #083A63;">Login</label> <input type="text"
 						name="loginUser" class="form-control" id="exampleInputEmail1"
@@ -17,26 +17,14 @@
 						class="form-text text-muted" style="color: #083A63;">Enter your login.</small>
 				</div>
 				<div class="form-group">
-					<label for="name" style="color: #083A63;">Name</label> <input type="text"
-						name="nameUser" class="form-control" id="exampleInputEmail1"
-						aria-describedby="nameHelp" /> <small id="nameHelp"
-						class="form-text text-muted" style="color: #083A63;">Enter your name.</small>
-				</div>
-				<div class="form-group">
-					<label for="surname" style="color: #083A63;">SurName</label> <input type="text"
-						name="surnameUser" class="form-control" id="exampleInputEmail1"
-						aria-describedby="surnameHelp" /> <small id="surnameHelp"
-						class="form-text text-muted" style="color: #083A63;">Enter your surname.</small>
-				</div>
-				<div class="form-group">
 					<label for="exampleInputPassword1" style="color: #083A63;">Password</label> <input
 						type="password" name="passwordUser" class="form-control"
 						id="exampleInputPassword1" /> <small id="PasswordHelp"
 						class="form-text text-muted" style="color: #083A63;">Enter your password.</small>
 				</div>
-				<button type="submit" class="btn btn-outline-success"
+				<button type="submit" class="btn btn-outline-success "
 					data-toggle="tooltip bg-dark" data-placement="bottom"
-					title="Registration new account" style="color: #F5EFE5; background-color: #27A8CF; border-color: #27A8CF;">Register</button>
+					title="log in to your account" style="color: #F5EFE5; background-color: #27A8CF; border-color: #27A8CF;">Sign in</button>
 			</form>
 		</div>
 	</div>

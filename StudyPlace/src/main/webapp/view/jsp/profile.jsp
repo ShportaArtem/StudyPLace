@@ -7,7 +7,7 @@
 </style>
 <%@ include file="/view/jspf/head.jspf"%>
 <body class="bg-secondary">
-<%@ include file="/view/jspf/header_main.jspf"%>
+<%@ include file="/view/jspf/header2.jspf"%>
 
 
 

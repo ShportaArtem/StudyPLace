@@ -1,56 +1,44 @@
 
 <header>
-      
-      <div class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container d-flex justify-content-between">
-          <a  class="navbar-brand d-flex align-items-center">
-            <img src="view/img/autologo.png" class="img" width="25" height="25">
-            <strong>StudyPlace</strong>
-          </a>
-			
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
- 
-      <li class="nav-item">
-        <a class="nav-link" href="/Autobase/Controller?command=getFlights"><fmt:message key="header.flights" /></a>
-      </li>
-      
-      <c:choose>
-      <c:when test="${sessionScope.userRole == '2' }">
-      <li class="nav-item">
-        <a class="nav-link" href="/Autobase/Controller?command=getMyRequests"><fmt:message key="header.my_requests" /></a>
-      </li>
-      </c:when>
-      
-      </c:choose>
-       <li class="nav-item">
-        <a class="nav-link" href="/Autobase/Controller?command=getCars"><fmt:message key="header.cars" /></a>
-      </li>
-       <c:choose>
-    <c:when test="${sessionScope.userRole != '2' }">
-      <li class="nav-item">
-        <a class="nav-link" href="/Autobase/Controller?command=getDrivers"><fmt:message key="header.drivers" /></a>
-      </li>
-      </c:when>
-      	</c:choose>
-      	<c:choose>
-      	<c:when test="${sessionScope.userRole == '1' }">
-      	<li class="nav-item">
-        <a class="nav-link" href="/Autobase/Controller?command=getDispathers"><fmt:message key="header.dispatchers" /></a>
-       </li>
-      	</c:when>
-      	</c:choose>
-    </ul>
-	
-	<div>
-	<li>
-	    <a href="/Autobase/settings.jsp" class="btn btn-outline-warning my-2 my-sm-0" type="submit"><fmt:message key="header.settings" /></a>
-	    <a href="/Autobase/Controller?command=logout" class="btn btn-outline-warning my-2 my-sm-0" type="submit"><fmt:message key="header.log_out" /></a>
-	</li>
+	<div class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+		<div class="container d-flex justify-content-between">
+			<a class="navbar-brand d-flex align-items-center"> 
+				<img src="view/img/autologo.png" class="img" width="25" height="25">
+				<strong style="color: #F5EFE5;">StudyPlace</strong>
+			</a>
+
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
+				<div class="container">
+					<div class="row">
+						<div class="col-sm">
+							<button class="btn btn-outline-warning my-2 my-sm-0" type="submit"
+								href="/Autobase/Controller?command=getProfile">Courses</button>
+						</div>
+						<div class="col-sm">
+							<button class="btn btn-outline-warning my-2 my-sm-0" type="submit" 
+								href="/Autobase/Controller?command=getProfile">Rating</button>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="btn-group">
+					<button type="button" class="btn btn-info dropdown-toggle"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Username?????</button>
+					<div class="dropdown-menu">
+						<a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="/StudyPlace/Controller?command=getProfile">Profile</a>
+						<div class="dropdown-divider"></div>
+						<a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="#">Settings</a>
+						<div class="dropdown-divider"></div>
+						<a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="#">Exit</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</div>
-	
-  </div>
-        </div>
-      </div>
-    </header> 
+</header>

@@ -15,9 +15,7 @@ public class Course implements Serializable{
 	
 	private String password;
 	
-	private int teacherId;	
-	
-	private String language;	
+	private int teacherId;		
 	
 	private Blob picture;
 	
@@ -61,14 +59,6 @@ public class Course implements Serializable{
 
 	public void setTeacherId(int teacherId) {
 		this.teacherId = teacherId;
-	}
-
-	public String getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
 	}
 
 	public Blob getPicture() {

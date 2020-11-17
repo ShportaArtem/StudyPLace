@@ -213,7 +213,7 @@ public class UserRep {
 			pstmt.setNull(k++, Types.INTEGER);
 			pstmt.setInt(k++, user.getRoleId());
 			pstmt.setString(k++, user.getPassword());
-			System.out.println(pstmt.toString());
+			
 			if (pstmt.executeUpdate() > 0) {
 				rs = pstmt.getGeneratedKeys();
 				if (rs.next()) {

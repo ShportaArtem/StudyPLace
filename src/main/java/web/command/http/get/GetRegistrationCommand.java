@@ -3,6 +3,7 @@ package web.command.http.get;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -31,7 +32,12 @@ public class GetRegistrationCommand implements Command{
 	@Override
 	public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws DBException, AppException {
-		
+		HttpSession session = request.getSession();
+		if(request.getParameter("errorRegistr").equals("false")) {
+			session.setAttribute("errorRegistr", false);
+		}else {
+			session.setAttribute("errorRegistr", true);
+		}
 		LOG.debug("Command starts");
 		
 		CommandResult cr = new HttpCommandResult(RequestType.GET,  Path.PAGE_REGISTRATION);

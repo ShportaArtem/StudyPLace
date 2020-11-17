@@ -6,7 +6,6 @@
 <body class="bg-secondary">
 
 	<%@ include file="/view/jspf/header3.jspf"%>
-	
 	<div class="container mt-sm-5 " style="width: 30%;">
 		<div class="jumbotron jumbotron-liquid pt-3" style="height: 608px;">
 			<form id="login_form" action="Controller" method="post">
@@ -14,13 +13,13 @@
 				<div class="form-group">
 					<label for="login" style="color: #083A63;">Login</label> <input type="text"
 						name="loginUser" class="form-control" id="exampleInputEmail1"
-						aria-describedby="emailHelp" /> <small id="loginHelp"
+						aria-describedby="emailHelp" pattern="\b\w+\b"/> <small id="loginHelp"
 						class="form-text text-muted" style="color: #083A63;">Enter your login.</small>
 				</div>
 				<div class="form-group">
 					<label for="name" style="color: #083A63;">Name</label> <input type="text"
 						name="nameUser" class="form-control" id="exampleInputEmail1"
-						aria-describedby="nameHelp" /> <small id="nameHelp"
+						aria-describedby="nameHelp" pattern="\b\w+[.-]?\w+\b"/> <small id="nameHelp"
 						class="form-text text-muted" style="color: #083A63;">Enter your name.</small>
 				</div>
 				<div class="form-group">
@@ -31,9 +30,14 @@
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1" style="color: #083A63;">Password</label> <input
-						type="password" name="passwordUser" class="form-control"
+						type="password" name="passwordUser" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" class="form-control"
 						id="exampleInputPassword1" /> <small id="PasswordHelp"
-						class="form-text text-muted" style="color: #083A63;">Enter your password.</small>
+						class="form-text text-muted" style="color: #083A63;">Password must contain eight characters, at least one letter and one number.</small>
+					 <c:choose>
+      					<c:when test="${sessionScope.errorRegistr}">
+     						 <label class="text-danger" for="exampleInputPassword1" >Login already exists</label> 
+      					</c:when>
+      				</c:choose>
 				</div>
 				<button type="submit" class="btn btn-outline-success"
 					data-toggle="tooltip bg-dark" data-placement="bottom"

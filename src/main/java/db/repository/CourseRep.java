@@ -29,17 +29,17 @@ public class CourseRep {
 			pstmt.setInt(k++, course.getTeacherId());
 			pstmt.setBlob(k++, course.getPicture());
 			if(course.getPrice()==null) {
-		        pstmt.setNull(k++, Types.DOUBLE);
-		      }else {
-		        pstmt.setDouble(k++, course.getPrice());
-		      }
-			System.out.println(pstmt.toString());
+				pstmt.setNull(k++, Types.DOUBLE);
+			}else {
+				pstmt.setDouble(k++, course.getPrice());
+			}
+			
 			if (pstmt.executeUpdate() > 0) {
 				rs = pstmt.getGeneratedKeys();
 				if (rs.next()) {
-			          int courseId = rs.getInt(1);
-			          course.setId(courseId);
-			        }
+					int courseId = rs.getInt(1);
+					course.setId(courseId);
+				}
 			}
 		} finally {
 			DBUtils.close(rs);

@@ -117,10 +117,10 @@ public class ContextListener implements ServletContextListener {
 		dispatcher.addCommand("getRegistration", new GetRegistrationCommand());
 		dispatcher.addCommand("getSignIn", new GetSignInCommand());
 		dispatcher.addCommand("getMain", new GetMainCommand());
-		dispatcher.addCommand("registration", new RegistrationCommand(registrServ));
+		dispatcher.addCommand("registration", new RegistrationCommand(registrServ, loginService));
 		dispatcher.addCommand("getProfile", new GetProfileCommand(loginService, profileService));
 		dispatcher.addCommand("getUpdateProfile", new GetUpdateProfileCommand(loginService, profileService));
-		dispatcher.addCommand("updateProfile", new UpdateProfileCommand(profileService));
+		dispatcher.addCommand("updateProfile", new UpdateProfileCommand(profileService,loginService));
 		dispatcher.addCommand("addCourse", new AddCourseCommand(courseService));
 		dispatcher.addCommand("openAddCourse", new OpenAddCourseCommand());
 		

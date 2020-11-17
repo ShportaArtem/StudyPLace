@@ -13,21 +13,27 @@
 				<div class="form-group">
 					<label for="login" style="color: #083A63;">Login</label> <input type="text"
 						name="loginUser" class="form-control" id="exampleInputEmail1"
-						aria-describedby="emailHelp" /> <small id="loginHelp"
+						aria-describedby="emailHelp" pattern="\b\w+\b"/> <small id="loginHelp"
 						class="form-text text-muted" style="color: #083A63;">Enter your login.</small>
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1" style="color: #083A63;">Password</label> <input
 						type="password" name="passwordUser" class="form-control"
-						id="exampleInputPassword1" /> <small id="PasswordHelp"
+						id="exampleInputPassword1" pattern="\b\w+\b" /> <small id="PasswordHelp"
 						class="form-text text-muted" style="color: #083A63;">Enter your password.</small>
 				</div>
+				<c:choose>
+      					<c:when test="${sessionScope.errorLogin}">
+     						 <label class="text-danger" >Wrong login or password</label> 
+      					</c:when>
+      				</c:choose>
 				<button type="submit" class="btn btn-outline-success "
 					data-toggle="tooltip bg-dark" data-placement="bottom"
 					title="log in to your account" style="color: #F5EFE5; background-color: #27A8CF; border-color: #27A8CF;">Sign in</button>
 			</form>
 		</div>
 	</div>
+
 
 	<%@ include file="/view/jspf/footer.jspf"%>
 	<%@ include file="/view/jspf/bodyScripts.jspf"%>

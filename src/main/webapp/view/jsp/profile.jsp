@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="userData ml-3">
                                     <h2 class="d-block" style="color:#083A63; font-size: 1.5rem;  font-weight: bold; text-transform: uppercase;">${sessionScope.user.getName()} ${sessionScope.user.getSurname()}</h2>
-                                    <h6 class="d-block" style="color:#14729D;">0 Certificates</h6>
+                                    <h6 class="d-block" style="color:#14729D;">0 Sertificates</h6>
                                     <h6 class="d-block" style="color:#14729D;">0 Points</h6>
                                 </div>
                                 
@@ -130,7 +130,7 @@
                             </div>
                         </div>
                     </div>
-                            	<a class="btn btn-outline-warning my-2 my-sm-0"  type="submit" href="/StudyPlace/Controller?command=getUpdateProfile">Edit Profile</a>
+                            	<a class="btn btn-outline-warning my-2 my-sm-0"  type="submit" href="/StudyPlace/Controller?command=getUpdateProfile&errorProfile=false">Edit Profile</a>
 <br> <br> <br>
                 </div>
             </div>

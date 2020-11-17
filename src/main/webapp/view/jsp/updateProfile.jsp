@@ -27,6 +27,11 @@
                                 <div class="col-8">
                                   <input id="username" name="username" style="color: #083A6;" placeholder="${sessionScope.user.getLogin()}" class="form-control here"  type="text">
                                 </div>
+                                	<c:choose>
+      									<c:when test="${sessionScope.errorProfile}">
+     						 				<label class="text-danger" for="exampleInputPassword1" >Login already exists</label> 
+      									</c:when>
+      								</c:choose>
                               </div>
 
                               <div class="form-group row">

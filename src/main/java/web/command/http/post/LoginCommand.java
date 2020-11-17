@@ -34,7 +34,8 @@ public class LoginCommand implements Command {
 
 	@Override
 	public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws AppException {
-
+		String forward = Path.PAGE_LOGIN_WITH_ERROR;
+		HttpCommandResult cr = new HttpCommandResult(RequestType.POST, forward);
 		LOG.debug("Command starts");
 		
 		HttpSession session = request.getSession(true);
@@ -46,19 +47,19 @@ public class LoginCommand implements Command {
 		LOG.trace("Found in request parameters: passwordUser --> " + password);
 		
 		if (login == null || password == null || login.isEmpty() || password.isEmpty()) {
-			throw new AppException("Login/password cannot be empty");
+			return cr;
 		}
 		
 		User user = loginService.findUserByLogin(login);
 		LOG.trace("Found in DB: user -->" + user );
 		
 		
-		String forward = Path.PAGE_ERROR_PAGE;
-		if(!"admin".equals(login) && !"admin".equals(password)) {
+		System.out.println("admin".equals(login) && "admin".equals(password));
+		if(!("admin".equals(login) & "admin".equals(password))) {
 		try {
 			if (user == null || !new String(HashUtil.getSHA(password)).equals(user.getPassword())) {
 				LOG.error("Cannot find user with such login/password");
-				throw new AppException("Cannot find user with such login/password");
+				return cr;
 			}
 		} catch (NoSuchAlgorithmException e) {
 			LOG.error(e);
@@ -66,8 +67,8 @@ public class LoginCommand implements Command {
 		}
 		Integer userRole = user.getRoleId();
 			forward = Path.PAGE_MAIN_POST;
-
-		CommandResult cr = new HttpCommandResult(RequestType.POST, forward);
+			cr.setResult(forward);
+			
 
 		session.setAttribute("user", user);
 		LOG.trace("Set the session attribute: user --> " + user);

@@ -1,6 +1,5 @@
 package web.command.http.post;
 
-import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +11,7 @@ import db.exception.AppException;
 import db.exception.DBException;
 import model.User;
 import model.UserInfo;
+import service.LoginService;
 //import service.LoginService;
 import service.ProfileService;
 //import utils.HashUtil;
@@ -26,10 +26,12 @@ public class UpdateProfileCommand implements Command {
 	private static Logger LOG = Logger.getLogger(LoginCommand.class);
 	
 	private ProfileService profileService ;
+	private LoginService loginService ;
 	
-	public UpdateProfileCommand(ProfileService profileService) {
+	public UpdateProfileCommand(ProfileService profileService, LoginService loginService) {
 		super();
 		this.profileService = profileService;
+		this.loginService = loginService;
 	}
 
 	
@@ -37,7 +39,7 @@ public class UpdateProfileCommand implements Command {
 	public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws DBException, AppException {
 LOG.debug("Command starts");
-		
+		HttpCommandResult cr = new HttpCommandResult(RequestType.POST,Path.PAGE_PROFILE_POST);
 		HttpSession session = request.getSession();
 		User userNow = (User) session.getAttribute("user");
 		UserInfo userInfoNow = (UserInfo) session.getAttribute("thisUserInfo");
@@ -46,6 +48,10 @@ LOG.debug("Command starts");
 		}
 		
 		if(!"".equals(request.getParameter("username"))) {
+			if(loginService.findUserByLogin(request.getParameter("username"))!=null) {
+				cr.setResult(Path.PAGE_REGISTRATION_WITH_ERROR);
+				return cr;
+			}
 			userNow.setLogin(request.getParameter("username"));
 			
 		}
@@ -74,13 +80,10 @@ LOG.debug("Command starts");
 		
 		
 		if(userNow.getInfoId().equals(0)) {
-			System.out.println("я здесь 1");
 			userInfoNow = profileService.insertUserInfo(userInfoNow);
 			profileService.updateUser(userNow, userInfoNow.getId());
 		    }else {
-		    	System.out.println("я здесь 2" + " " + userNow.getInfoId());
 		      profileService.updateUserInfo(userInfoNow);
-		      //System.out.println("я здесь 2");
 		      profileService.updateUser(userNow);
 		    }
 		
@@ -91,7 +94,6 @@ LOG.debug("Command starts");
 		session.setAttribute("user", userNow);
 		session.setAttribute("thisUserInfo", userInfoNow);
 		request.getSession().setAttribute("methodProfile", methodProfile);
-		CommandResult cr = new HttpCommandResult(RequestType.POST,Path.PAGE_PROFILE_POST);
 		
 		LOG.debug("Commands finished");
 		return cr;

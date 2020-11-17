@@ -15,7 +15,7 @@ public class Course implements Serializable{
 	
 	private String password;
 	
-	private int teacherId;		
+	private int teacherId;	
 	
 	private Blob picture;
 	

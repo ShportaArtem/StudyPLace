@@ -56,7 +56,7 @@ LOG.debug("Command starts");
 		course.setPicture(null);
 		courseServ.insertCourse(course);
 
-		CommandResult cr = new HttpCommandResult(RequestType.POST,Path.PAGE_MAIN_POST);
+		CommandResult cr = new HttpCommandResult(RequestType.POST,Path.PAGE_COURSES_POST);
 		
 		LOG.debug("Commands finished");
 		return cr;

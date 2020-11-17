@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import db.exception.AppException;
 import db.exception.DBException;
 import model.User;
+import service.LoginService;
 import service.RegistrationService;
 import utils.HashUtil;
 import web.Path;
@@ -24,10 +25,12 @@ public class RegistrationCommand implements Command{
 private static Logger LOG = Logger.getLogger(LoginCommand.class);
 
 	private RegistrationService registrServ;
+	private LoginService loginService;
 	
-	public RegistrationCommand(RegistrationService registrServ) {
+	public RegistrationCommand(RegistrationService registrServ, LoginService loginService) {
 		super();
 		this.registrServ = registrServ;
+		this.loginService = loginService;
 	}
 	
 	@Override
@@ -37,7 +40,12 @@ private static Logger LOG = Logger.getLogger(LoginCommand.class);
 		LOG.debug("Command starts");
 		
 		HttpSession session = request.getSession();
+		HttpCommandResult cr = new HttpCommandResult(RequestType.POST,Path.PAGE_MAIN_POST);
 		User user = new User();
+		if(loginService.findUserByLogin(request.getParameter("loginUser"))!=null) {
+			cr.setResult(Path.PAGE_REGISTRATION_WITH_ERROR);
+			return cr;
+		}
 		user.setLogin(request.getParameter("loginUser"));
 		LOG.trace("Found in request parameters: login --> " + user.getLogin());
 		
@@ -59,7 +67,7 @@ private static Logger LOG = Logger.getLogger(LoginCommand.class);
 		registrServ.insertUser(user);
 		LOG.trace("Insert in DB user --> " + user);
 		
-		CommandResult cr = new HttpCommandResult(RequestType.POST,Path.PAGE_MAIN_POST);
+		
 		int methodMain = 2;
 		session.setAttribute("methodMain", methodMain);
 		session.setAttribute("user", user);

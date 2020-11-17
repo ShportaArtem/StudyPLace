@@ -6,6 +6,7 @@
             <strong>StudyPlace</strong>
           </a>
           <a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="/StudyPlace/Controller?command=getProfile">Profile</a>
+          <a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="/StudyPlace/Controller?command=openAddCourse">Course</a>
         </div>
       </div>
     </header>

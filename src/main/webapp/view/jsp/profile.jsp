@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="userData ml-3">
                                     <h2 class="d-block" style="color:#083A63; font-size: 1.5rem;  font-weight: bold; text-transform: uppercase;">${sessionScope.user.getName()} ${sessionScope.user.getSurname()}</h2>
-                                    <h6 class="d-block" style="color:#14729D;">0 Sertificates</h6>
+                                    <h6 class="d-block" style="color:#14729D;">0 Certificates</h6>
                                     <h6 class="d-block" style="color:#14729D;">0 Points</h6>
                                 </div>
                                 

@@ -17,5 +17,6 @@ public final class Path {
 	public static final String PAGE_PROFILE_POST = "/StudyPlace/Controller?command=getProfile";
 	public static final String PAGE_PROFILE = "/view/jsp/profile.jsp";
 	public static final String PAGE_UPDATE_PROFILE = "/view/jsp/updateProfile.jsp";
+	public static final String PAGE_ADD_COURSE = "/view/jsp/addCourse.jsp";
 
 }

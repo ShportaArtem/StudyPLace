@@ -99,22 +99,21 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `studyplacedb`.`Courses`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `studyplacedb`.`Courses` ;
+DROP TABLE IF EXISTS studyplacedb.Courses ;
 
-CREATE TABLE IF NOT EXISTS `studyplacedb`.`Courses` (
-  `ID` INT NOT NULL AUTO_INCREMENT,
-  `Name` VARCHAR(45) NOT NULL,
-  `Description` LONGTEXT NOT NULL,
-  `Password` VARCHAR(45) NULL,
-  `TeacherID` INT NOT NULL,
-  `Picture` BLOB NULL,
-  `Price` DOUBLE NULL,
-  `Language` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`ID`),
-  INDEX `Teacher_idx` (`TeacherID` ASC) VISIBLE,
-  CONSTRAINT `Courses_Users`
-    FOREIGN KEY (`TeacherID`)
-    REFERENCES `studyplacedb`.`Users` (`ID`)
+CREATE TABLE IF NOT EXISTS studyplacedb.Courses (
+  ID INT NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(45) NOT NULL,
+  Description LONGTEXT NOT NULL,
+  Password VARCHAR(45) NULL,
+  TeacherID INT NOT NULL,
+  Picture BLOB NULL,
+  Price DOUBLE NULL,
+  PRIMARY KEY (ID),
+  INDEX Teacher_idx (TeacherID ASC) VISIBLE,
+  CONSTRAINT Courses_Users
+    FOREIGN KEY (TeacherID)
+    REFERENCES studyplacedb.Users (ID)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

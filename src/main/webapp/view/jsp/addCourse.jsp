@@ -10,17 +10,19 @@
 		<div class="jumbotron jumbotron-liquid pt-3">
 			<form id="addcourse_form" action="Controller" method="post">
 				<input type="hidden" name="command" value="addCourse" />
-				<div class="form-group">
-					<label for="description" style="color: #083A63;">Description</label> <input type="text"
-						name="description" class="form-control"/> <small id="description"
-						class="form-text text-muted" style="color: #083A63;">Describe your course.</small>
-				</div>
+				
 				<div class="form-group">
 					<label for="name" style="color: #083A63;">Name</label> <input type="text"
 						name="name" class="form-control" /> <small id="name"
 						class="form-text text-muted" style="color: #083A63;">Enter course name.</small>
 				</div>
-
+				
+				<div class="form-group">
+					<label for="description" style="color: #083A63;">Description</label> <input type="text"
+						name="description" class="form-control"/> <small id="description"
+						class="form-text text-muted" style="color: #083A63;">Describe your course.</small>
+				</div>
+				
 				<div class="form-group">
 					<label for="exampleInputPassword1" style="color: #083A63;">Password</label> <input
 						type="password" name="password" class="form-control"

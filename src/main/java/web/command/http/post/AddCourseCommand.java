@@ -33,7 +33,7 @@ public class AddCourseCommand implements Command{
 	@Override
 	public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws DBException, AppException {
-LOG.debug("Command starts");
+		LOG.debug("Command starts");
 		
 		HttpSession session = request.getSession();
 		Course course = new Course();

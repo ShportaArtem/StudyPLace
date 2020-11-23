@@ -70,7 +70,7 @@
 		</init-param>
 		<init-param>
 			<param-name>out-of-control</param-name>
-			<param-value>login getRegistration getSignIn registration getProfile updateProfile getUpdateProfile getMain</param-value>
+			<param-value>login getUpdateCourse getRegistration getSignIn registration getProfile updateProfile getUpdateProfile getMain getCourses getCourse leaveComment searchCourses logout addCourse openAddCourse subscribeCourse updateCourse</param-value>
 		</init-param>
 	</filter>
 	

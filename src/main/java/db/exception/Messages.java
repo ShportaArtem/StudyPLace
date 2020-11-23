@@ -33,4 +33,11 @@ public class Messages {
 	
 	public static final String ERR_CANNOT_INSERT_USER = "Cannot registration user";
 	
+	public static final String ERR_CANNOT_OBTAIN_COURSES = "Cannot obtain COURSES LIST";
+	
+	public static final String ERR_CANNOT_OBTAIN_COURSE_BY_ID = "Cannot obtain a course by its id";
+
+	public static final String ERR_CANNOT_OBTAIN_COMMENTS = "Cannot obtain COMMENTS LIST";
+
+	public static final String ERR_CANNOT_INSERT_SUBSCRIPTION = "Cannot INSERT SUBSCRIPTION";
 }

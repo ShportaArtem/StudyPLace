@@ -20,7 +20,7 @@ import web.controller.RequestType;
 
 public class GetUpdateProfileCommand implements Command{
 
-	private static final Logger LOG = Logger.getLogger(GetRegistrationCommand.class);
+	private static final Logger LOG = Logger.getLogger(GetUpdateProfileCommand.class);
 	
 	private LoginService loginService;
 	private ProfileService profileService;
@@ -36,11 +36,6 @@ public class GetUpdateProfileCommand implements Command{
 		HttpSession session = request.getSession(true);
 
 		User thisUser = (User) session.getAttribute("user");
-		if(request.getParameter("errorProfile").equals("false")) {
-			session.setAttribute("errorProfile", false);
-		}else {
-			session.setAttribute("errorProfile", true);
-		}
 		
 		thisUser = loginService.findUserById(thisUser.getId());
 		UserInfo thisUserInfo = profileService.findUserInfoById(thisUser.getInfoId());

@@ -20,7 +20,7 @@ import web.controller.RequestType;
 
 public class GetProfileCommand implements Command{
 
-	private static final Logger LOG = Logger.getLogger(GetRegistrationCommand.class);
+	private static final Logger LOG = Logger.getLogger(GetProfileCommand.class);
 		
 	private LoginService loginService;
 	private ProfileService profileService;

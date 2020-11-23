@@ -17,7 +17,7 @@ import model.UserInfo;
 
 public class ProfileService {
 	
-	private static final Logger LOG = Logger.getLogger(LoginService.class);
+	private static final Logger LOG = Logger.getLogger(ProfileService.class);
 
 	private DBManager dbManager;
 	private UserInfoRep userInfoRep;
@@ -27,6 +27,23 @@ public class ProfileService {
 		this.dbManager = dbManager;
 		this.userInfoRep= userInfoRep;
 		this.userRep= userRep;
+	}
+	
+	public User findUserById(int id) throws AppException {
+		User user = null;
+		Connection con=null;
+		try {
+			con = dbManager.getConnection();
+			user = userRep.findUserById(con, id);
+			con.commit();
+		} catch (SQLException ex) {
+			DBUtils.rollback(con);
+			LOG.error(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
+			throw new DBException(Messages.ERR_CANNOT_OBTAIN_USER_BY_ID, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return user;
 	}
 	
 	public UserInfo findUserInfoById(int id) throws AppException {

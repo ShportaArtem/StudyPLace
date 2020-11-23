@@ -3,22 +3,18 @@
 <!doctype html>
 <html lang="en">
 <style>
-   <%@include file='/view/css/main.css' %>
+a.btn-info{
+background:#27A8CF;
+}
+a.btn-info:hover{
+background:#14729D;
+}
 </style>
 <%@ include file="/view/jspf/head.jspf"%>
 <body class="bg-secondary">
 <%@ include file="/view/jspf/header2.jspf"%>
 
-
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-
-<link rel="stylesheet" href="https://bootswatch.com/4/simplex/bootstrap.min.css"/>
-
+<div class="container-fluid">
 
 <div class="container">
         <div class="row">
@@ -120,7 +116,12 @@
                                                 ${sessionScope.thisUserInfo.getWebsite()}
                                             </a>
                                         </div>
-                                        <hr />
+                                        <hr/>
+                                        <div class="text-center">
+						                	<a class="btn btn-info my-2 my-sm-0"  type="submit" href="/StudyPlace/Controller?command=getUpdateProfile">Edit Profile</a>
+											
+						                </div>
+						                <hr/>
 
                                     </div>
                                     <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
@@ -130,14 +131,13 @@
                             </div>
                         </div>
                     </div>
-                            	<a class="btn btn-outline-warning my-2 my-sm-0"  type="submit" href="/StudyPlace/Controller?command=getUpdateProfile&errorProfile=false">Edit Profile</a>
-<br> <br> <br>
+                            	
                 </div>
             </div>
         </div>
     </div>
 
-
+</div>
 
 
 <%@ include file="/view/jspf/footer.jspf"%>

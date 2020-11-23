@@ -1,9 +1,9 @@
-package model;
+package modelView;
 
 import java.io.Serializable;
 import java.sql.Blob;
 
-public class Course implements Serializable{
+public class CourseView implements Serializable{
 
 	private static final long serialVersionUID = -1842141320487532709L;
 	
@@ -17,10 +17,31 @@ public class Course implements Serializable{
 	
 	private int teacherId;	
 	
+	private String teacherName;
+	
+	private int countFollowers;
+	
 	private Blob picture;
 	
 	private Double price;
 
+	
+	public String getTeacherName() {
+		return teacherName;
+	}
+	
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+	
+	public int getCountFollowers() {
+		return countFollowers;
+	}
+	
+	public void setCountFollowers(int countFollowers) {
+		this.countFollowers = countFollowers;
+	}
+	
 	public int getId() {
 		return id;
 	}

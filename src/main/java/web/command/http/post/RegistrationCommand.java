@@ -22,7 +22,7 @@ import web.controller.RequestType;
 
 public class RegistrationCommand implements Command{
 
-private static Logger LOG = Logger.getLogger(LoginCommand.class);
+private static Logger LOG = Logger.getLogger(RegistrationCommand.class);
 
 	private RegistrationService registrServ;
 	private LoginService loginService;

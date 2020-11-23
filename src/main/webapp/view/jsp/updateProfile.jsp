@@ -2,6 +2,14 @@
 <%@ include file="/view/jspf/taglib.jspf"%>
 <!doctype html>
 <html lang="en">
+<style>
+button.btn-info{
+background:#27A8CF;
+}
+button.btn-info:hover{
+background:#14729D;
+}
+</style>
 <%@ include file="/view/jspf/head.jspf"%>
 <body class="bg-secondary">
 <%@ include file="/view/jspf/header2.jspf"%>
@@ -27,11 +35,6 @@
                                 <div class="col-8">
                                   <input id="username" name="username" style="color: #083A6;" placeholder="${sessionScope.user.getLogin()}" class="form-control here"  type="text">
                                 </div>
-                                	<c:choose>
-      									<c:when test="${sessionScope.errorProfile}">
-     						 				<label class="text-danger" for="exampleInputPassword1" >Login already exists</label> 
-      									</c:when>
-      								</c:choose>
                               </div>
 
                               <div class="form-group row">
@@ -53,7 +56,7 @@
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label" style="color: #083A6;">About</label> 
                                         <div class="col-8">
-                                          <input id="text" name="about" style="color: #083A6;" placeholder="${sessionScope.thisUserInfo.getAbout()}" class="form-control here"  type="text">
+                                          <input id="text" name="about" style="color: #083A6;" value="${sessionScope.thisUserInfo.getAbout()}" class="form-control here"  type="text">
                                         </div>
                                       </div>
                                 </c:when>  
@@ -74,7 +77,7 @@
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label" style="color: #083A6;">Email</label> 
                                         <div class="col-8">
-                                          <input id="text" name="e-mail" style="color: #083A6;" placeholder="${sessionScope.thisUserInfo.getEmail()}" class="form-control here"  type="email">
+                                          <input id="text" name="e-mail" style="color: #083A6;" value="${sessionScope.thisUserInfo.getEmail()}" class="form-control here"  type="email">
                                         </div>
                                       </div>
                                 </c:when>  
@@ -94,7 +97,7 @@
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label" style="color: #083A6;">Messenger</label> 
                                         <div class="col-8">
-                                          <input id="text" name="messanger" style="color: #083A6;" placeholder="${sessionScope.thisUserInfo.getMessanger()}" class="form-control here"  type="text">
+                                          <input id="text" name="messanger" style="color: #083A6;" value="${sessionScope.thisUserInfo.getMessanger()}" class="form-control here"  type="text">
                                         </div>
                                       </div>
                                 </c:when>  
@@ -114,7 +117,7 @@
                                     <div class="form-group row">
                                         <label for="text" class="col-4 col-form-label" style="color: #083A6;">Web-site</label> 
                                         <div class="col-8">
-                                          <input id="text" name="website" style="color: #083A6;" placeholder="${sessionScope.thisUserInfo.getWebsite()}" class="form-control here"  type="text">
+                                          <input id="text" name="website" style="color: #083A6;" value="${sessionScope.thisUserInfo.getWebsite()}" class="form-control here"  type="text">
                                         </div>
                                       </div>
                                 </c:when>  
@@ -131,8 +134,8 @@
 
 
 <div class="form-group">
-   <button type="submit" class="btn btn-success mb-2" style="color: #F5EFE5; background-color: #27A8CF;"><fmt:message key="button.confirm" /></button>
-   <button type="button" class="btn btn-primary mb-2" style="color: #F5EFE5; background-color: #27A8CF;" onclick="javascript:history.back()"><fmt:message key="button.back" /></button>
+   <button type="submit" class="btn btn-info mb-2" style="color: #F5EFE5; background-color: #27A8CF;"><fmt:message key="button.confirm" /></button>
+   <button type="button" class="btn btn-info mb-2" style="color: #F5EFE5; background-color: #27A8CF;" onclick="javascript:history.back()"><fmt:message key="button.back" /></button>
 </div>
 
 

@@ -1,16 +1,16 @@
-package model;
+package modelView;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Comment implements Serializable{
+public class CommentView implements Serializable{
 	private static final long serialVersionUID = 1593054485251702976L;
 	
 	private int id;
 	
 	private Date dateTime;
 
-	private int userId;
+	private String userName;
 	
 	private String text;
 	
@@ -34,12 +34,12 @@ public class Comment implements Serializable{
 		this.dateTime = dateTime;
 	}
 
-	public int getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getText() {

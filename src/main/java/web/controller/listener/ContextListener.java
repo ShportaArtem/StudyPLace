@@ -13,24 +13,35 @@ import org.apache.log4j.PropertyConfigurator;
 
 import db.DBManager;
 import db.exception.DBException;
+import db.repository.CommentRep;
 import db.repository.CourseRep;
+import db.repository.SubscriptionRep;
 import db.repository.UserInfoRep;
 import db.repository.UserRep;
+import service.CommentService;
 import service.CourseService;
 import service.LoginService;
 import service.ProfileService;
 import service.RegistrationService;
+import service.SubscriptionService;
 import web.command.http.HttpCommandDispatcher;
 import web.command.http.get.DefaultCommand;
+import web.command.http.get.GetCourseCommand;
+import web.command.http.get.GetCoursesCommand;
 import web.command.http.get.GetMainCommand;
 import web.command.http.get.GetProfileCommand;
 import web.command.http.get.GetRegistrationCommand;
 import web.command.http.get.GetSignInCommand;
+import web.command.http.get.GetUpdateCourseCommand;
 import web.command.http.get.GetUpdateProfileCommand;
 import web.command.http.get.OpenAddCourseCommand;
 import web.command.http.post.AddCourseCommand;
+import web.command.http.post.LeaveCommentCommand;
 import web.command.http.post.LoginCommand;
+import web.command.http.post.LogoutCommand;
 import web.command.http.post.RegistrationCommand;
+import web.command.http.post.SubscribeForCourseCommand;
+import web.command.http.post.UpdateCourseCommand;
 import web.command.http.post.UpdateProfileCommand;
 
 
@@ -105,11 +116,15 @@ public class ContextListener implements ServletContextListener {
 		UserRep userRep = new UserRep();
 		UserInfoRep userInfoRep = new UserInfoRep();
 		CourseRep courseRep = new CourseRep();
+		CommentRep commentRep = new CommentRep();
+		SubscriptionRep subsRep= new SubscriptionRep();
 		
 		LoginService loginService = new LoginService(dbManager, userRep);
 		RegistrationService registrServ = new RegistrationService(dbManager, userRep);
 		ProfileService profileService = new ProfileService(dbManager,userInfoRep, userRep);
 		CourseService courseService = new CourseService(dbManager, courseRep);
+		CommentService commentService = new CommentService(dbManager, commentRep);
+		SubscriptionService subscribeService = new SubscriptionService(dbManager, subsRep);
 		
 		HttpCommandDispatcher dispatcher = new HttpCommandDispatcher(new DefaultCommand());
 		
@@ -120,10 +135,17 @@ public class ContextListener implements ServletContextListener {
 		dispatcher.addCommand("registration", new RegistrationCommand(registrServ, loginService));
 		dispatcher.addCommand("getProfile", new GetProfileCommand(loginService, profileService));
 		dispatcher.addCommand("getUpdateProfile", new GetUpdateProfileCommand(loginService, profileService));
-		dispatcher.addCommand("updateProfile", new UpdateProfileCommand(profileService,loginService));
+		dispatcher.addCommand("updateProfile", new UpdateProfileCommand(profileService));
 		dispatcher.addCommand("addCourse", new AddCourseCommand(courseService));
 		dispatcher.addCommand("openAddCourse", new OpenAddCourseCommand());
-		
+		dispatcher.addCommand("getCourses", new GetCoursesCommand(courseService, profileService, subscribeService));
+		dispatcher.addCommand("getCourse", new GetCourseCommand(courseService, commentService, profileService, subscribeService));
+		dispatcher.addCommand("leaveComment", new LeaveCommentCommand(commentService));
+		dispatcher.addCommand("logout", new LogoutCommand());
+		dispatcher.addCommand("subscribeCourse", new SubscribeForCourseCommand(subscribeService));
+		dispatcher.addCommand("updateCourse", new UpdateCourseCommand(courseService));
+		dispatcher.addCommand("getUpdateCourse", new GetUpdateCourseCommand(courseService));
+
 		context.setAttribute("dispatcher", dispatcher);
 		
 		

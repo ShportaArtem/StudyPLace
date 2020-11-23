@@ -223,7 +223,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `studyplacedb`.`Subscriptions` ;
 
 CREATE TABLE IF NOT EXISTS `studyplacedb`.`Subscriptions` (
-  `UserID` INT NOT NULL AUTO_INCREMENT,
+  `UserID` INT NOT NULL,
   `CourseID` INT NOT NULL,
   INDEX `Course_idx` (`CourseID` ASC) VISIBLE,
   INDEX `User_idx` (`UserID` ASC) VISIBLE,

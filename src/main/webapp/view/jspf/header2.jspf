@@ -1,9 +1,16 @@
-
+<style>
+button.btn-info{
+background:#27A8CF;
+}
+button.btn-info:hover{
+background:#14729D;
+}
+</style>
 <header>
 
 	<div class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
 		<div class="container d-flex justify-content-between">
-			<a class="navbar-brand d-flex align-items-center"> 
+			<a class="navbar-brand d-flex align-items-center" href="/StudyPlace/Controller?command=getCourses"> 
 				<img src="view/img/autologo.png" class="img" width="25" height="25">
 				<strong style="color: #F5EFE5;">StudyPlace</strong>
 			</a>
@@ -15,12 +22,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm">
-							<button class="btn btn-outline-warning my-2 my-sm-0" type="submit"
-								href="/Autobase/Controller?command=getProfile">Courses</button>
-						</div>
-						<div class="col-sm">
-							<button class="btn btn-outline-warning my-2 my-sm-0" type="submit" 
-								href="/Autobase/Controller?command=getProfile">Rating</button>
+							<button class="btn btn-outline-warning my-2 my-sm-0" type="submit" >Rating</button>
 						</div>
 					</div>
 				</div>
@@ -28,13 +30,13 @@
 				
 				<div class="btn-group">
 					<button type="button" class="btn btn-info dropdown-toggle"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Username?????</button>
-					<div class="dropdown-menu">
-						<a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="/StudyPlace/Controller?command=getProfile">Profile</a>
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${sessionScope.user.getName()}</button>
+					<div class="dropdown-menu text-center">
+						<a  href="/StudyPlace/Controller?command=getProfile">Profile</a>
 						<div class="dropdown-divider"></div>
-						<a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="#">Settings</a>
+						<a  href="#">Settings</a>
 						<div class="dropdown-divider"></div>
-						<a class="btn btn-outline-warning my-2 my-sm-0" type="submit" href="#">Exit</a>
+						<a  href="/StudyPlace/Controller?command=logout">Exit</a>
 					</div>
 				</div>
 

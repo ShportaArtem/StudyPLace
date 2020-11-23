@@ -13,12 +13,7 @@ import java.util.List;
 import db.utils.DBUtils;
 import model.User;
 
-/**
- * User repository. Works with table users in db. 
- * 
- * @author A.Shporta
- *
- */
+
 public class UserRep {
 	
 	private static final String SQL_CREATE_USER = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)";

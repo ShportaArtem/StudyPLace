@@ -16,7 +16,7 @@ import web.controller.RequestType;
 
 public class GetSignInCommand implements Command{
 
-private static final Logger LOG = Logger.getLogger(GetRegistrationCommand.class);
+private static final Logger LOG = Logger.getLogger(GetSignInCommand.class);
 	
 	public GetSignInCommand() {
 		super();

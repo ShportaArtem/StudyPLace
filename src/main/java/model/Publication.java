@@ -15,7 +15,7 @@ public class Publication implements Serializable{
 	
 	private int courseID;
 
-	private int pisition;
+	private int position;
 	
 	private Date dateTime;
 
@@ -51,12 +51,12 @@ public class Publication implements Serializable{
 		this.courseID = courseID;
 	}
 
-	public int getPisition() {
-		return pisition;
+	public int getPosition() {
+		return position;
 	}
 
-	public void setPisition(int pisition) {
-		this.pisition = pisition;
+	public void setPosition(int position) {
+		this.position = position;
 	}
 
 	public Date getDateTime() {

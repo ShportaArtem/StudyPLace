@@ -49,10 +49,15 @@ background:#14729D;
 		    <div class="mt-2">
 		    <c:choose>
 		        <c:when test="${sessionScope.thisCourse.getTeacherId().equals(sessionScope.thisUser.getId())}">
-		         	<a href="/StudyPlace/Controller?command=getUpdateCourse&courseId=${sessionScope.thisCourse.getId()}" class="btn btn-primary" type="submit" >Edit a course</a>
+		         	<a href="/StudyPlace/Controller?command=getUpdateCourse&courseId=${sessionScope.thisCourse.getId()}" 
+		         	class="btn btn-primary" type="submit" >Edit a course</a>
+		         	<a href="/StudyPlace/Controller?command=getPublications&courseId=${sessionScope.thisCourse.getId()}" 
+		         	class="btn btn-primary" type="submit" >View Publications</a>
 		        </c:when> 
 		        <c:when test="${sessionScope.subscribed.equals(true)}">
 		         	<a href="" class="btn btn-primary" type="submit" > unsubscribe </a>
+		         	<a href="/StudyPlace/Controller?command=getPublication&coursePosition=1" 
+		         	class="btn btn-primary" type="submit" >Start a course</a>
 		        </c:when>
 		        <c:otherwise>
 		        	<a href="/StudyPlace/Controller?command=subscribeCourse&courseId=${sessionScope.thisCourse.getId()}" class="btn btn-primary" type="submit" > subscribe </a>

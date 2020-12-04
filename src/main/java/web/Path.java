@@ -10,7 +10,6 @@ package web;
 public final class Path {
 	
 	public static final String PAGE_LOGIN = "login.jsp";
-	public static final String PAGE_TASK = "/view/jsp/task.jsp";
 	public static final String PAGE_ERROR_PAGE = "/view/jsp/error_page.jsp";
 	public static final String PAGE_MAIN = "/view/jsp/main.jsp";
 	public static final String PAGE_REGISTRATION = "/view/jsp/registration.jsp";
@@ -27,5 +26,10 @@ public final class Path {
 	public static final String PAGE_COURSE = "/view/jsp/course.jsp";
 	public static final String PAGE_UPDATE_PROFILE_POST = "/StudyPlace/Controller?command=updateCourse";
 	public static final String PAGE_UPDATE_COURSE = "/view/jsp/update_course.jsp";
-
+	public static final String PAGE_ADD_PUBLICATION = "/view/jsp/addPublication.jsp";
+	public static final String PAGE_ADD_PUBLICATION_POST = "/StudyPlace/Controller?command=addPublication";
+	public static final String PAGE_PUBLICATIONS = "/view/jsp/publications.jsp";
+	public static final String PAGE_PUBLICATIONS_POST = "/StudyPlace/Controller?command=getPublications";
+	public static final String PAGE_PUBLICATION = "/view/jsp/publication.jsp";
+	public static final String PAGE_PUBLICATION_POST = "/StudyPlace/Controller?command=getPublication";
 }

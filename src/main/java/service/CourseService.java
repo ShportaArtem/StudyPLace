@@ -12,11 +12,13 @@ import db.exception.DBException;
 import db.exception.Messages;
 import db.repository.AnswerForQuestionRep;
 import db.repository.CourseRep;
+import db.repository.PublicationRep;
 import db.repository.QuestionRep;
 import db.repository.TaskRep;
 import db.utils.DBUtils;
 import model.AnswerForQuestion;
 import model.Course;
+import model.Publication;
 import model.Question;
 import model.Task;
 
@@ -28,15 +30,17 @@ public class CourseService {
 	private TaskRep taskRep;
 	private QuestionRep questionRep;
 	private AnswerForQuestionRep answerForQuestionRep;
+	private PublicationRep publicationRep;
 	
 	public CourseService(DBManager dbManager, CourseRep courseRep, TaskRep taskRep, QuestionRep questionRep,
-			AnswerForQuestionRep answerForQuestionRep) {
+			AnswerForQuestionRep answerForQuestionRep, PublicationRep publicationRep) {
 		super();
 		this.dbManager = dbManager;
 		this.courseRep = courseRep;
 		this.taskRep = taskRep;
 		this.questionRep = questionRep;
 		this.answerForQuestionRep = answerForQuestionRep;
+		this.publicationRep= publicationRep;
 	}
 
 	public Course insertCourse(Course course) throws AppException {
@@ -215,5 +219,54 @@ public class CourseService {
 			DBUtils.close(con);
 		}
 		
+	}
+	
+	public List<Publication> findPublicationsByCourseId(int id) throws AppException{
+		List<Publication> publications = null;
+		Connection con=null;
+		try {
+			con = dbManager.getConnection();
+			publications = publicationRep.findPublicationsByCourseId(con, id);
+			con.commit();
+		} catch (SQLException ex) {
+			DBUtils.rollback(con);
+			LOG.error(Messages.ERR_CANNOT_OBTAIN_COMMENTS, ex);
+			throw new DBException(Messages.ERR_CANNOT_OBTAIN_COMMENTS, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return publications;
+	}
+	
+	public Publication insertPublication(Publication publication) throws AppException {
+		Connection con=null;
+		try {
+			con = dbManager.getConnection();
+			con.setAutoCommit(true);
+			publication = publicationRep.insertPublication(con, publication);
+		} catch (SQLException ex ) {
+			LOG.error(Messages.ERR_CANNOT_INSERT_USER, ex);
+			throw new DBException(Messages.ERR_CANNOT_INSERT_USER, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return publication;
+	}
+	
+	public Publication findPublicationByPosition(int id) throws AppException {
+		Publication publication = null;
+		Connection con=null;
+		try {
+			con = dbManager.getConnection();
+			publication = publicationRep.findPublicationByPosition(con, id);
+			con.commit();
+		} catch (SQLException ex) {
+			DBUtils.rollback(con);
+			LOG.error(Messages.ERR_CANNOT_OBTAIN_COURSE_BY_ID, ex);
+			throw new DBException(Messages.ERR_CANNOT_OBTAIN_COURSE_BY_ID, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return publication;
 	}
 }

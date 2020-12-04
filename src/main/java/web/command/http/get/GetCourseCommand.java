@@ -62,6 +62,7 @@ public class GetCourseCommand implements Command{
 
 		Course thisCourse = coursesService.findCourseById(courseId);
 		User thisUser = (User) session.getAttribute("user");
+		
 		List<Comment> thisComments = null;
 		try {
 			thisComments = commServ.findCommentsByCourseId(thisCourse.getId());
@@ -114,6 +115,7 @@ public class GetCourseCommand implements Command{
 		session.setAttribute("thisComments", thisCommentsView);
 		session.setAttribute("thisUser", thisUser);
 		session.setAttribute("subscribed", subscribed);
+		session.setAttribute("courseId", courseId);
 		LOG.debug("Command finished");
 		return cr;
 	}

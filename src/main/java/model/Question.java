@@ -19,10 +19,6 @@ public class Question implements Serializable{
 	
 	private boolean oneCorrectAnswer;
 	
-	private boolean file;
-
-	private boolean freeText;
-
 	public int getId() {
 		return id;
 	}
@@ -79,20 +75,4 @@ public class Question implements Serializable{
 		this.oneCorrectAnswer = oneCorrectAnswer;
 	}
 
-	public boolean isFile() {
-		return file;
-	}
-
-	public void setFile(boolean file) {
-		this.file = file;
-	}
-
-	public boolean isFreeText() {
-		return freeText;
-	}
-
-	public void setFreeText(boolean freeText) {
-		this.freeText = freeText;
-	}
-	
 }

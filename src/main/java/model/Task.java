@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 public class Task implements Serializable{
 	private static final long serialVersionUID = -5521467769307252473L;
@@ -12,16 +11,8 @@ public class Task implements Serializable{
 	
 	private String description;
 	
-	private int courseId;
+	private int publicationId;
 	
-	private int position;
-	
-	private int test;
-	
-	private Date deadline;
-	
-	private Date dateTime;
-
 	public int getId() {
 		return id;
 	}
@@ -46,45 +37,14 @@ public class Task implements Serializable{
 		this.description = description;
 	}
 
-	public int getCourseId() {
-		return courseId;
+	public int getPublicationId() {
+		return publicationId;
 	}
 
-	public void setCourseId(int courseId) {
-		this.courseId = courseId;
+	public void setPublicationId(int courseId) {
+		this.publicationId = courseId;
 	}
 
-	public int getPosition() {
-		return position;
-	}
-
-	public void setPosition(int position) {
-		this.position = position;
-	}
-
-	public int getTest() {
-		return test;
-	}
-
-	public void setTest(int test) {
-		this.test = test;
-	}
-
-	public Date getDeadline() {
-		return deadline;
-	}
-
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
-	}
-
-	public Date getDateTime() {
-		return dateTime;
-	}
-
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
-	}
 	
 	
 	

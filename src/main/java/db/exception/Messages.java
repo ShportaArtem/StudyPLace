@@ -13,9 +13,13 @@ public class Messages {
 	
 	public static final String ERR_CANNOT_OBTAIN_USER_ORDER_BEANS = "Cannot obtain user order beans";
 
+	public static final String ERR_CANNOT_OBTAIN_TASK_BY_PUBLICATION_ID = "Cannot obtain task by publication id";
+
 	public static final String ERR_CANNOT_OBTAIN_CONNECTION = "Cannot obtain a connection from the pool";
 
 	public static final String ERR_CANNOT_OBTAIN_USERS = "Cannot obtain users";
+
+	public static final String ERR_CANNOT_OBTAIN_ANSWERS = "Cannot obtain answers";
 
 	public static final String ERR_CANNOT_OBTAIN_USER_BY_ID = "Cannot obtain a user by its id";
 
@@ -33,11 +37,19 @@ public class Messages {
 	
 	public static final String ERR_CANNOT_INSERT_USER = "Cannot registration user";
 	
+	public static final String ERR_CANNOT_INSERT_TASK = "Cannot create task";
+
+	public static final String ERR_CANNOT_INSERT_QUESTION= "Cannot create question";
+
+	public static final String ERR_CANNOT_INSERT_ANSWER_FOR_QUESTION= "Cannot create answer for question";
+	
 	public static final String ERR_CANNOT_OBTAIN_COURSES = "Cannot obtain COURSES LIST";
 	
 	public static final String ERR_CANNOT_OBTAIN_COURSE_BY_ID = "Cannot obtain a course by its id";
 
 	public static final String ERR_CANNOT_OBTAIN_COMMENTS = "Cannot obtain COMMENTS LIST";
+
+	public static final String ERR_CANNOT_OBTAIN_QUESTIONS = "Cannot obtain questions";
 
 	public static final String ERR_CANNOT_INSERT_SUBSCRIPTION = "Cannot INSERT SUBSCRIPTION";
 }

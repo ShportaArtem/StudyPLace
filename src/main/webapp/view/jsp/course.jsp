@@ -29,7 +29,14 @@ background:#14729D;
       <div class="col-lg-12">
 
         <div class="card mt-4">
-          <img class="card-img-top " width="100%" src="http://placehold.it/900x400" alt="">
+          	  <c:choose>
+                  <c:when test="${sessionScope.thisCourse.getPicture() != null}">
+                  	<img class="card-img-top" width="700" height="auto" src="data:image/jpg;base64,${sessionScope.thisCourse.getPicture64()}" alt="">
+                  </c:when>
+                  <c:otherwise>
+                  	<img class="card-img-top " width="100%" src="http://placehold.it/900x400" alt="">
+                  </c:otherwise>
+              </c:choose>
           <div class="card-body">
             <h3 class="card-title" style="text-transform: capitalize; color:#27A8CF;">${sessionScope.thisCourse.getName()}</h3>
             <input type="hidden" name="commentId" value="${sessionScope.thisCourse.getId()}" />

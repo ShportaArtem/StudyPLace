@@ -55,6 +55,13 @@ public class UpdateCourseCommand implements Command {
 		else {
 			thisCourse.setPrice(Double.parseDouble(request.getParameter("price")));
 		}
+		System.out.println(request.getParameter("coursepicture"));
+		if(!"".equals(request.getParameter("coursepicture"))) {
+			thisCourse.setPicture(request.getParameter("coursepicture"));	
+		}
+		else {
+			thisCourse.setPicture(null);
+		}
 		
 		courseService.updateCourse(thisCourse);
 		session.setAttribute("thisCourse", thisCourse);

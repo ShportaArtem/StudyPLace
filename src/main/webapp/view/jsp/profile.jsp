@@ -25,7 +25,16 @@ background:#14729D;
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
                                 <div class="image-container">
-                                    <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+	                            <c:choose>
+	                                <c:when test="${sessionScope.thisUserInfo != null && sessionScope.thisUserInfo.getPicture() != null}">
+	                                	<img src="data:image/jpg;base64,${sessionScope.thisUserInfo.getPicture64()}" id="imgProfile" style="width: 150px; height: 150px; border-radius: 75px; margin-right: 20px;" class="img-thumbnail" />
+	                                </c:when>  
+	                                  
+	                                <c:otherwise>
+	                                   <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+	                                </c:otherwise>
+	                            </c:choose>
+                                    
                                     
                                 </div>
                                 <div class="userData ml-3">

@@ -28,7 +28,7 @@ public class AddTaskCommand implements Command{
 	public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws DBException, AppException {
 		HttpSession session = request.getSession(false);
-		CommandResult cr = new HttpCommandResult(RequestType.POST, Path.PAGE_TASK);
+		CommandResult cr = new HttpCommandResult(RequestType.POST, Path.PAGE_ADD_COURSE);
 		Publication publ = (Publication)session.getAttribute("publicationNow");
 		Task task = new Task();
 		task.setDescription(request.getParameter("description"));

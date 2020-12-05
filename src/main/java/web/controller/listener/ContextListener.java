@@ -13,10 +13,13 @@ import org.apache.log4j.PropertyConfigurator;
 
 import db.DBManager;
 import db.exception.DBException;
+import db.repository.AnswerForQuestionRep;
 import db.repository.CommentRep;
 import db.repository.CourseRep;
 import db.repository.PublicationRep;
+import db.repository.QuestionRep;
 import db.repository.SubscriptionRep;
+import db.repository.TaskRep;
 import db.repository.UserInfoRep;
 import db.repository.UserRep;
 import service.CommentService;
@@ -124,11 +127,14 @@ public class ContextListener implements ServletContextListener {
 		CommentRep commentRep = new CommentRep();
 		SubscriptionRep subsRep= new SubscriptionRep();
 		PublicationRep publicationRep = new PublicationRep();
+		QuestionRep questionRep = new QuestionRep();
+		TaskRep taskRep = new TaskRep();
+		AnswerForQuestionRep answerForQuestionRep = new AnswerForQuestionRep();
 		
 		LoginService loginService = new LoginService(dbManager, userRep);
 		RegistrationService registrServ = new RegistrationService(dbManager, userRep);
 		ProfileService profileService = new ProfileService(dbManager,userInfoRep, userRep);
-		CourseService courseService = new CourseService(dbManager, courseRep, publicationRep);
+		CourseService courseService = new CourseService(dbManager, courseRep, taskRep, questionRep, answerForQuestionRep, publicationRep);
 		CommentService commentService = new CommentService(dbManager, commentRep);
 		SubscriptionService subscribeService = new SubscriptionService(dbManager, subsRep);
 		

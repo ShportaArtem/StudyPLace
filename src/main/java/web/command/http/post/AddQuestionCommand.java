@@ -31,7 +31,7 @@ public class AddQuestionCommand implements Command{
 	public CommandResult execute(HttpServletRequest request, HttpServletResponse response)
 			throws DBException, AppException {
 		HttpSession session = request.getSession(false);
-		CommandResult cr = new HttpCommandResult(RequestType.POST, Path.PAGE_TASK);
+		CommandResult cr = new HttpCommandResult(RequestType.POST, Path.PAGE_ADD_COURSE);
 		Task task = (Task)session.getAttribute("taskNow");
 		Question question = new Question();
 		question.setMark(Integer.parseInt(request.getParameter("mark")));

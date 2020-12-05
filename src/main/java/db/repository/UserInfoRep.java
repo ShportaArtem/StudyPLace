@@ -12,8 +12,8 @@ import model.UserInfo;
 public class UserInfoRep {
 	
 	private static final String SQL_FIND_USER_INFO_BY_ID = "SELECT * FROM Users_info WHERE ID=?";
-	private static final String SQL_UPDATE_USER_BY_ID = "UPDATE Users_info SET about=?, `E-Mail`=?, messanger=?, `Web-site`=? WHERE ID=?";
-	private static final String SQL_CREATE_USER_INFO = "INSERT INTO Users_info VALUES (DEFAULT, null, 1, ?, ?, ?, ?)";
+	private static final String SQL_UPDATE_USER_INFO_BY_ID = "UPDATE Users_info SET about=?, `E-Mail`=?, messanger=?, `Web-site`=?, `Picture`=? WHERE ID=?";
+	private static final String SQL_CREATE_USER_INFO = "INSERT INTO Users_info VALUES (DEFAULT, ?, 1, ?, ?, ?, ?)";
 
 	public UserInfo findUserInfoById(Connection con, int id) throws SQLException {
 		UserInfo userInfo = null;
@@ -33,6 +33,7 @@ public class UserInfoRep {
 	private UserInfo extractUserInfo(ResultSet rs) throws SQLException {
 		UserInfo userInfo = new UserInfo();
 		userInfo.setId(rs.getInt("ID"));
+		userInfo.setPicture(rs.getString("Picture"));
 		userInfo.setAbout(rs.getString("About"));
 		userInfo.setLocked(rs.getBoolean("IsLocked"));
 		userInfo.setEmail(rs.getString("E-Mail"));
@@ -48,13 +49,14 @@ public class UserInfoRep {
 		ResultSet rs = null;
 
 		try {
-			pstmt = con.prepareStatement(SQL_UPDATE_USER_BY_ID, Statement.RETURN_GENERATED_KEYS);
+			pstmt = con.prepareStatement(SQL_UPDATE_USER_INFO_BY_ID, Statement.RETURN_GENERATED_KEYS);
 
 			int k = 1;
 			pstmt.setString(k++, userInfo.getAbout());
 			pstmt.setString(k++, userInfo.getEmail());
 			pstmt.setString(k++, userInfo.getMessanger());
 			pstmt.setString(k++, userInfo.getWebsite());
+			pstmt.setString(k++, userInfo.getPicture());
 			pstmt.setInt(k++, userInfo.getId());
 			
 			if (pstmt.executeUpdate() > 0) {
@@ -81,6 +83,7 @@ public class UserInfoRep {
 			pstmt = con.prepareStatement(SQL_CREATE_USER_INFO, Statement.RETURN_GENERATED_KEYS);
 
 			int k = 1;
+			pstmt.setString(k++, userInfo.getPicture());
 			pstmt.setString(k++, userInfo.getWebsite());
 			pstmt.setString(k++, userInfo.getMessanger());
 			pstmt.setString(k++, userInfo.getEmail());

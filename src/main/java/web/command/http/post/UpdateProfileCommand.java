@@ -1,6 +1,5 @@
 package web.command.http.post;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,9 +10,7 @@ import db.exception.AppException;
 import db.exception.DBException;
 import model.User;
 import model.UserInfo;
-//import service.LoginService;
 import service.ProfileService;
-//import utils.HashUtil;
 import web.Path;
 import web.command.Command;
 import web.command.CommandResult;
@@ -86,14 +83,16 @@ LOG.debug("Command starts");
 			userInfoNow.setWebsite("");
 		}
 		
+		if(!"".equals(request.getParameter("picture"))) {
+			System.out.println(request.getParameter("picture"));
+			userInfoNow.setPicture(request.getParameter("picture"));
+		}
+		
 		if(userNow.getInfoId().equals(0)) {
-			System.out.println("я здесь 1");
 			userInfoNow = profileService.insertUserInfo(userInfoNow);
 			profileService.updateUser(userNow, userInfoNow.getId());
 		    }else {
-		    	System.out.println("я здесь 2" + " " + userNow.getInfoId());
 		      profileService.updateUserInfo(userInfoNow);
-		      //System.out.println("я здесь 2");
 		      profileService.updateUser(userNow);
 		    }
 		

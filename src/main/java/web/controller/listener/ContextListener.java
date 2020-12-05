@@ -13,10 +13,13 @@ import org.apache.log4j.PropertyConfigurator;
 
 import db.DBManager;
 import db.exception.DBException;
+import db.repository.AnswerForQuestionRep;
 import db.repository.CommentRep;
 import db.repository.CourseRep;
 import db.repository.PublicationRep;
+import db.repository.QuestionRep;
 import db.repository.SubscriptionRep;
+import db.repository.TaskRep;
 import db.repository.UserInfoRep;
 import db.repository.UserRep;
 import service.CommentService;
@@ -36,11 +39,16 @@ import web.command.http.get.GetPublicationCommand;
 import web.command.http.get.GetPublicationsCommand;
 import web.command.http.get.GetRegistrationCommand;
 import web.command.http.get.GetSignInCommand;
+import web.command.http.get.GetTaskCommand;
 import web.command.http.get.GetUpdateCourseCommand;
 import web.command.http.get.GetUpdateProfileCommand;
 import web.command.http.get.OpenAddCourseCommand;
+import web.command.http.get.OpenAddQuestionCommand;
+import web.command.http.get.OpenAddTaskCommand;
 import web.command.http.post.AddCourseCommand;
 import web.command.http.post.AddPublicationCommand;
+import web.command.http.post.AddQuestionCommand;
+import web.command.http.post.AddTaskCommand;
 import web.command.http.post.LeaveCommentCommand;
 import web.command.http.post.LoginCommand;
 import web.command.http.post.LogoutCommand;
@@ -124,11 +132,14 @@ public class ContextListener implements ServletContextListener {
 		CommentRep commentRep = new CommentRep();
 		SubscriptionRep subsRep= new SubscriptionRep();
 		PublicationRep publicationRep = new PublicationRep();
+		TaskRep taskRep = new TaskRep();
+		QuestionRep questionRep = new QuestionRep();
+		AnswerForQuestionRep answerForQuestionRep = new AnswerForQuestionRep();
 		
 		LoginService loginService = new LoginService(dbManager, userRep);
 		RegistrationService registrServ = new RegistrationService(dbManager, userRep);
 		ProfileService profileService = new ProfileService(dbManager,userInfoRep, userRep);
-		CourseService courseService = new CourseService(dbManager, courseRep, publicationRep);
+		CourseService courseService = new CourseService(dbManager, courseRep, taskRep,  questionRep, answerForQuestionRep, publicationRep);
 		CommentService commentService = new CommentService(dbManager, commentRep);
 		SubscriptionService subscribeService = new SubscriptionService(dbManager, subsRep);
 		
@@ -145,6 +156,7 @@ public class ContextListener implements ServletContextListener {
 		dispatcher.addCommand("addCourse", new AddCourseCommand(courseService));
 		dispatcher.addCommand("openAddCourse", new OpenAddCourseCommand());
 		dispatcher.addCommand("getCourses", new GetCoursesCommand(courseService, profileService, subscribeService));
+		dispatcher.addCommand("getTask", new GetTaskCommand(courseService));
 		dispatcher.addCommand("getCourse", new GetCourseCommand(courseService, commentService, profileService, subscribeService));
 		dispatcher.addCommand("leaveComment", new LeaveCommentCommand(commentService));
 		dispatcher.addCommand("logout", new LogoutCommand());
@@ -152,7 +164,11 @@ public class ContextListener implements ServletContextListener {
 		dispatcher.addCommand("updateCourse", new UpdateCourseCommand(courseService));
 		dispatcher.addCommand("getUpdateCourse", new GetUpdateCourseCommand(courseService));
 		dispatcher.addCommand("addPublication", new AddPublicationCommand(courseService));
+		dispatcher.addCommand("addTask", new AddTaskCommand(courseService));
+		dispatcher.addCommand("addQuestion", new AddQuestionCommand(courseService));
 		dispatcher.addCommand("getAddPublication", new GetAddPublicationCommand());
+		dispatcher.addCommand("openAddTask", new OpenAddTaskCommand());
+		dispatcher.addCommand("openAddQuestion", new OpenAddQuestionCommand());
 		dispatcher.addCommand("getPublications", new GetPublicationsCommand(courseService));
 		dispatcher.addCommand("getPublication", new GetPublicationCommand(courseService));
 		context.setAttribute("dispatcher", dispatcher);

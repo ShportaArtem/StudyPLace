@@ -50,7 +50,6 @@ public class GetCourseCommand implements Command{
 		LOG.debug("Command get course starts");
 		HttpSession session = request.getSession(true);
 		
-		
 		int courseId;
 		try {
 			courseId = Integer. parseInt(request.getParameter("courseId"));

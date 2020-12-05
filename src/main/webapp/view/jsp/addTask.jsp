@@ -8,7 +8,7 @@
 
 <div class="container mt-sm-5 " style="width: 30%;">
 		<div class="jumbotron jumbotron-liquid pt-3">
-			<form id="addcourse_form" action="Controller" method="post">
+			<form id="addtask_form" action="Controller" method="post">
 				<input type="hidden" name="command" value="addTask" />
 				
 				<div class="form-group">

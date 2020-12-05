@@ -9,7 +9,7 @@
 <div class="container mt-sm-5 " style="width: 30%;">
 		<div class="jumbotron jumbotron-liquid pt-3">
 			<form id="addcourse_form" action="Controller" method="post">
-				<input type="hidden" name="command" value="addTask" />
+				<input type="hidden" name="command" value="addQuestion" />
 				
 				<div class="form-group">
 					<label for="question" style="color: #083A63;">Question</label> <input type="text"

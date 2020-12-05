@@ -38,6 +38,11 @@ public class GetTaskCommand implements Command {
 		List<Question> questions = courseServ.findQuestionsByTaskId(task.getId());
 		questions.sort((Question arg0, Question arg1) -> arg1.getPosition() - arg0.getPosition());
 		List<AnswerForQuestion> answers = courseServ.findAnswerForQuestions();
+		boolean hasNext=false;
+		if(courseServ.findPublicationByPosition(publ.getPosition()+1)!=null) {
+			hasNext = true;
+		}
+		session.setAttribute("hasNext", hasNext);
 		session.setAttribute("taskNow", task);
 		session.setAttribute("questions", questions);
 		session.setAttribute("answersForQuestions", answers);

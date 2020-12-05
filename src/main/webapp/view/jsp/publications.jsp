@@ -18,7 +18,8 @@
 	        </div>
         </div>
         <a href="/StudyPlace/Controller?command=getAddPublication&courseId=${sessionScope.thisCourse.getId()}" 
-		         	class="btn btn-primary" type="submit" >Add Publication</a><br><br>
+		         	class="btn btn-primary" type="submit" >Add Publication</a> <a href="/StudyPlace/Controller?command=getCourse&courseId=${sessionScope.thisCourse.getId()}" 
+		         	class="btn btn-primary" type="submit" >Back to course</a><br><br>
 
         <!-- Blog Post -->
         <c:forEach var="publicationNow" items="${sessionScope.publicationsNow}">

@@ -70,6 +70,10 @@ public class GetPublicationCommand implements Command{
 		else {
 			hasPrevious = false;
 		}
+		boolean hasNextTask = false;
+		if(coursesService.findTaskByPublicationId(publicationNow.getId())!=null) {
+			hasNextTask = true;
+		}
 		boolean hasNext;
 		if(coursesService.findPublicationByPosition(coursePosition+1)!=null) {
 			hasNext = true;
@@ -83,6 +87,7 @@ public class GetPublicationCommand implements Command{
 		session.setAttribute("courseId", courseId);
 		session.setAttribute("thisCourse", thisCourse);
 		session.setAttribute("hasNext", hasNext);
+		session.setAttribute("hasNextTask", hasNextTask);
 		session.setAttribute("hasPrevious", hasPrevious);
 		session.setAttribute("hasMaterial", hasMaterial);
 		LOG.debug("Command finished");

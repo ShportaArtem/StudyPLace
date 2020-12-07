@@ -31,7 +31,7 @@ background:#14729D;
 	                                </c:when>  
 	                                  
 	                                <c:otherwise>
-	                                   <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+	                                   <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px; border-radius: 75px;" class="img-thumbnail" />
 	                                </c:otherwise>
 	                            </c:choose>
                                     

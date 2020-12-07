@@ -18,7 +18,7 @@ public class CourseRep {
 	private static final String SQL_FIND_ALL_COURSES="SELECT * FROM courses";
 	private static final String SQL_FIND_COURSES_BY_ID = "SELECT * FROM courses WHERE id=?";
 	private static final String SQL_SEARCH_IN_COURSES = "select * from courses where name like ? "; //or description like '%?%'
-	private static final String SQL_UPDATE_COURSE_BY_ID = "UPDATE courses SET name=?, Description =?, Price =? WHERE ID=?";
+	private static final String SQL_UPDATE_COURSE_BY_ID = "UPDATE courses SET name=?, Description =?, Price =?, Picture =? WHERE ID=?";
 
 	
 	public Course insertCourse(Connection con, Course course) throws SQLException { 
@@ -34,7 +34,7 @@ public class CourseRep {
 			pstmt.setString(k++, course.getDescription());
 			pstmt.setString(k++, course.getPassword());
 			pstmt.setInt(k++, course.getTeacherId());
-			pstmt.setBlob(k++, course.getPicture());
+			pstmt.setString(k++, course.getPicture());
 			if(course.getPrice()==null) {
 				pstmt.setNull(k++, Types.DOUBLE);
 			}else {
@@ -85,7 +85,7 @@ public class CourseRep {
 		course.setDescription(rs.getString("Description"));
 		course.setPassword(rs.getString("Password"));
 		course.setTeacherId(rs.getInt("TeacherID"));
-		course.setPicture(rs.getBlob("Picture"));
+		course.setPicture(rs.getString("Picture"));
 		course.setPrice(rs.getDouble("Price"));
 		return course;
 	}
@@ -142,6 +142,7 @@ public class CourseRep {
 			}else {
 				pstmt.setDouble(k++, course.getPrice());
 			}
+			pstmt.setString(k++, course.getPicture());
 			pstmt.setInt(k++, course.getId());
 			
 			if (pstmt.executeUpdate() > 0) {

@@ -64,6 +64,7 @@ public class GetCoursesCommand implements Command{
 			thisCoursetView.setName(course.getName());
 			thisCoursetView.setTeacherId(course.getTeacherId());
 			thisCoursetView.setPrice(course.getPrice());
+			thisCoursetView.setPicture(course.getPicture());
 			
 			int k = 0;
 			for(Subscription sb: subscription) {

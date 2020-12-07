@@ -50,7 +50,30 @@ background:#14729D;
                                   <input id="lastname" name="surname" style="color: #083A6;" placeholder="${sessionScope.user.getSurname()}" class="form-control here" type="text">
                                 </div>
                               </div>
-
+							
+							<hr>
+							<!-- ~~~~~~~~~~~~~~~~~~~~~~~ -->
+							<c:choose>
+                                <c:when test="${!sessionScope.thisUserInfo.getPicture().equals('')}">
+                                	<div style="display: block; width:100%;">
+                                    	<label for="userpicture" style="color: #083A6;">Picture</label> 
+                                    </div>
+                                    <div style="display: block; margin-bottom:24px; width:100%;">
+                                    	<input id="userpicture" name="picture" style="color: #083A6;"  type="file">
+                                    </div>
+                                </c:when>  
+                                  
+                                <c:otherwise>
+                                   <div style="display: block; width:100%;">
+                                    	<label for="userpicture" style="color: #083A6;">Picture</label> 
+                                    </div>
+                                    <div style="display: block; margin-bottom:24px; width:100%;">
+                                    	<input id="userpicture" name="picture" style="color: #083A6;"  type="file">
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
+							<!-- ~~~~~~~~~~~~~~~~~~~~~~~ -->
+							
                             <c:choose>
                                 <c:when test="${!sessionScope.thisUserInfo.getAbout().equals('')}">
                                     <div class="form-group row">

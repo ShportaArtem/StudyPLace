@@ -96,6 +96,7 @@ public class GetCourseCommand implements Command{
 		thisCoursetView.setName(thisCourse.getName());
 		thisCoursetView.setTeacherId(thisCourse.getTeacherId());
 		thisCoursetView.setPrice(thisCourse.getPrice());
+		thisCoursetView.setPicture(thisCourse.getPicture());
 		
 		int k = 0;
 		boolean subscribed = false;

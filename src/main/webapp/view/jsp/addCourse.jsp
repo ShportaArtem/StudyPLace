@@ -31,11 +31,12 @@
 				</div>
 				
 				<div class="form-group">
-					<label for="picture" style="color: #083A63;">Picture</label> <div class="image-container">
-                                    <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
-                                    
-                                </div> <small id="pictureHelp"
-						class="form-text text-muted" style="color: #083A63;">Enter course picture.</small>
+					<div style="display: block; width:100%;">
+						<label for="coursepicture" style="color: #083A6;">Picture</label> 
+					</div>
+					<div style="display: block; margin-bottom:24px; width:100%;">
+						<input id="coursepicture" name="coursepicture" style="color: #083A6;"  type="file">
+					</div>
 				</div>
 
 

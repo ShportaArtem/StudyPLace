@@ -51,9 +51,15 @@ public class AddCourseCommand implements Command{
 		}else {
 			course.setPrice(Double.parseDouble(request.getParameter("price")));
 		}
+		if(!request.getParameter("coursepicture").equals("")) {
+			course.setPicture(request.getParameter("coursepicture"));	
+		}
+		else {
+			course.setPicture(null);
+		}
+		
 		User user = (User) session.getAttribute("user");
 		course.setTeacherId(user.getId());
-		course.setPicture(null);
 		courseServ.insertCourse(course);
 
 		CommandResult cr = new HttpCommandResult(RequestType.POST,Path.PAGE_COURSES_POST);

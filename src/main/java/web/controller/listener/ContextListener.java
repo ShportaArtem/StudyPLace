@@ -139,7 +139,7 @@ public class ContextListener implements ServletContextListener {
 		LoginService loginService = new LoginService(dbManager, userRep);
 		RegistrationService registrServ = new RegistrationService(dbManager, userRep);
 		ProfileService profileService = new ProfileService(dbManager,userInfoRep, userRep);
-		CourseService courseService = new CourseService(dbManager, courseRep, taskRep,  questionRep, answerForQuestionRep, publicationRep);
+		CourseService courseService = new CourseService(dbManager, courseRep, taskRep, questionRep, answerForQuestionRep, publicationRep);
 		CommentService commentService = new CommentService(dbManager, commentRep);
 		SubscriptionService subscribeService = new SubscriptionService(dbManager, subsRep);
 		

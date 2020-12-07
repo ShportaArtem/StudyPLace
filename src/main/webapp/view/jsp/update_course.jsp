@@ -46,7 +46,14 @@
 						</div>
 	                </c:otherwise>
                 </c:choose>
-                                
+                
+                <hr>
+               	<div style="display: block; width:100%;">
+					<label for="coursepicture" style="color: #083A6;">Picture</label> 
+				</div>
+				<div style="display: block; margin-bottom:24px; width:100%;">
+					<input id="coursepicture" name="coursepicture" style="color: #083A6;"  type="file">
+				</div>
 				
 				
 				<div class="form-group">

@@ -14,6 +14,7 @@ import org.apache.log4j.PropertyConfigurator;
 import db.DBManager;
 import db.exception.DBException;
 import db.repository.AnswerForQuestionRep;
+import db.repository.CertificateRep;
 import db.repository.CommentRep;
 import db.repository.CourseRep;
 import db.repository.PublicationRep;
@@ -22,6 +23,7 @@ import db.repository.SubscriptionRep;
 import db.repository.TaskRep;
 import db.repository.UserInfoRep;
 import db.repository.UserRep;
+import service.CertificateService;
 import service.CommentService;
 import service.CourseService;
 import service.LoginService;
@@ -31,8 +33,11 @@ import service.SubscriptionService;
 import web.command.http.HttpCommandDispatcher;
 import web.command.http.get.DefaultCommand;
 import web.command.http.get.GetAddPublicationCommand;
+import web.command.http.get.GetCertificateCommand;
 import web.command.http.get.GetCourseCommand;
 import web.command.http.get.GetCoursesCommand;
+import web.command.http.get.GetCoursesCreatedByUserCommand;
+import web.command.http.get.GetCoursesForLearningCommand;
 import web.command.http.get.GetMainCommand;
 import web.command.http.get.GetProfileCommand;
 import web.command.http.get.GetPublicationCommand;
@@ -135,6 +140,8 @@ public class ContextListener implements ServletContextListener {
 		TaskRep taskRep = new TaskRep();
 		QuestionRep questionRep = new QuestionRep();
 		AnswerForQuestionRep answerForQuestionRep = new AnswerForQuestionRep();
+		CertificateRep cartRep = new CertificateRep();
+		
 		
 		LoginService loginService = new LoginService(dbManager, userRep);
 		RegistrationService registrServ = new RegistrationService(dbManager, userRep);
@@ -142,6 +149,7 @@ public class ContextListener implements ServletContextListener {
 		CourseService courseService = new CourseService(dbManager, courseRep, taskRep, questionRep, answerForQuestionRep, publicationRep);
 		CommentService commentService = new CommentService(dbManager, commentRep);
 		SubscriptionService subscribeService = new SubscriptionService(dbManager, subsRep);
+		CertificateService certificateService = new CertificateService(dbManager, cartRep);
 		
 		HttpCommandDispatcher dispatcher = new HttpCommandDispatcher(new DefaultCommand());
 		
@@ -171,6 +179,10 @@ public class ContextListener implements ServletContextListener {
 		dispatcher.addCommand("openAddQuestion", new OpenAddQuestionCommand());
 		dispatcher.addCommand("getPublications", new GetPublicationsCommand(courseService));
 		dispatcher.addCommand("getPublication", new GetPublicationCommand(courseService));
+		dispatcher.addCommand("getMyCourses", new GetCoursesCreatedByUserCommand(courseService, profileService, subscribeService));
+		dispatcher.addCommand("getMyLearning", new GetCoursesForLearningCommand(courseService, profileService, subscribeService));
+		dispatcher.addCommand("getCertificate", new GetCertificateCommand(certificateService, courseService));
+		
 		context.setAttribute("dispatcher", dispatcher);
 		
 		

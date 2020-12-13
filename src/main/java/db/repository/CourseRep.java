@@ -18,6 +18,7 @@ public class CourseRep {
 	private static final String SQL_FIND_ALL_COURSES="SELECT * FROM courses";
 	private static final String SQL_FIND_COURSES_BY_ID = "SELECT * FROM courses WHERE id=?";
 	private static final String SQL_SEARCH_IN_COURSES = "select * from courses where name like ? "; //or description like '%?%'
+	private static final String SQL_FIND_COURSES_BY_USER_ID = "select * from courses where TeacherID = ? ";
 	private static final String SQL_UPDATE_COURSE_BY_ID = "UPDATE courses SET name=?, Description =?, Price =?, Picture =? WHERE ID=?";
 
 	
@@ -112,6 +113,28 @@ public class CourseRep {
 		try {
 			pstmt = con.prepareStatement(SQL_SEARCH_IN_COURSES);
 			pstmt.setString(1, str);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				courses.add(extractCourse(rs));
+			}
+			con.commit();
+		} finally {
+			DBUtils.close(rs);
+			DBUtils.close(pstmt);
+		}
+		return courses;
+	}
+	
+	public List<Course> findCoursesByTeacherId(Connection con, Integer id) throws SQLException {
+		List<Course> courses = new ArrayList<Course>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = con.prepareStatement(SQL_FIND_COURSES_BY_USER_ID);
+			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

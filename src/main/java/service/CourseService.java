@@ -154,6 +154,23 @@ public class CourseService {
 		return courses;
 	}
 	
+	public List<Course> findCoursesByTeacherID(Integer id) throws AppException{
+		List<Course> courses = null;
+		Connection con=null;
+		try {
+			con = dbManager.getConnection();
+			courses = courseRep.findCoursesByTeacherId(con, id);
+			con.commit();
+		} catch (SQLException ex) {
+			DBUtils.rollback(con);
+			LOG.error(Messages.ERR_CANNOT_OBTAIN_COURSES, ex);
+			throw new DBException(Messages.ERR_CANNOT_OBTAIN_COURSES, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return courses;
+	}
+	
 	public Course findCourseById(int id) throws AppException {
 		Course course = null;
 		Connection con=null;

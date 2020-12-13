@@ -57,5 +57,22 @@ public class SubscriptionService {
 		return subs;
 	}
 	
+	public List<Subscription> findSubByUserId(int id) throws AppException {
+		List<Subscription> subs = null;
+		Connection con=null;
+		try {
+			con = dbManager.getConnection();
+			subs = subsRep.findSubByUserId(con, id);
+			con.commit();
+		} catch (SQLException ex) {
+			DBUtils.rollback(con);
+			LOG.error(Messages.ERR_CANNOT_OBTAIN_COURSES, ex);
+			throw new DBException(Messages.ERR_CANNOT_OBTAIN_COURSES, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return subs;
+	}
+	
 	
 }

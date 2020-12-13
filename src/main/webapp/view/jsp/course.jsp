@@ -117,7 +117,8 @@ background:#14729D;
 
 </div>
 
-
+<%@ include file="/view/jspf/footer.jspf"%>
+<%@ include file="/view/jspf/bodyScripts.jspf"%>
 
 </body>
 </html>

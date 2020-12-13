@@ -24,18 +24,18 @@ public class RegistrationService {
 		this.userRep= userRep;
 	}
 	
-	public void insertUser(User user) throws AppException {
+	public User insertUser(User user) throws AppException {
 		Connection con=null;
 		try {
 			con = dbManager.getConnection();
 			con.setAutoCommit(true);
-			userRep.insertUser(con, user);
+			user = userRep.insertUser(con, user);
 		} catch (SQLException ex ) {
 			LOG.error(Messages.ERR_CANNOT_INSERT_USER, ex);
 			throw new DBException(Messages.ERR_CANNOT_INSERT_USER, ex);
 		} finally {
 			DBUtils.close(con);
 		}
-		
+		return user;
 	}
 }

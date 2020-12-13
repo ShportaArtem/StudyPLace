@@ -1,18 +1,10 @@
-<style>
-button.btn-info{
-background:#27A8CF;
-}
-button.btn-info:hover{
-background:#14729D;
-}
-</style>
 <header>
 
 	<div class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
 		<div class="container d-flex justify-content-between">
 			<a class="navbar-brand d-flex align-items-center" href="/StudyPlace/Controller?command=getCourses"> 
 				<!--<img src="view/img/autologo.png" class="img" width="25" height="25"> -->
-				<strong style="color: #F5EFE5;">StudyPlace</strong>
+				<strong>StudyPlace</strong>
 			</a>
 
 
@@ -23,6 +15,12 @@ background:#14729D;
 					<div class="row">
 						<div class="col-sm">
 							<button class="btn btn-outline-warning my-2 my-sm-0" type="submit" >Rating</button>
+						</div>
+						<div class="col-sm">
+							<a class="btn btn-outline-warning my-2 my-sm-0" href="/StudyPlace/Controller?command=getMyCourses">MyCourses</a>
+						</div>
+						<div class="col-sm">
+							<a class="btn btn-outline-warning my-2 my-sm-0" href="/StudyPlace/Controller?command=getMyLearning">MyLearning</a>
 						</div>
 					</div>
 				</div>

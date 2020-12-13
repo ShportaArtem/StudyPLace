@@ -13,6 +13,8 @@ public final class Path {
 	public static final String PAGE_TASK = "/view/jsp/task.jsp";
 	public static final String PAGE_ERROR_PAGE = "/view/jsp/error_page.jsp";
 	public static final String PAGE_MAIN = "/view/jsp/main.jsp";
+	public static final String PAGE_COURSES_CREATED = "/view/jsp/coursesCreated.jsp";
+	public static final String PAGE_COURSES_LEARNING = "/view/jsp/coursesForLearning.jsp";
 	public static final String PAGE_REGISTRATION = "/view/jsp/registration.jsp";
 	public static final String PAGE_REGISTRATION_WITH_ERROR = "/StudyPlace/Controller?command=getRegistration&errorRegistr=true";
 	public static final String PAGE_LOGIN_WITH_ERROR = "/StudyPlace/Controller?command=getSignIn&errorLogin=true";
@@ -26,6 +28,7 @@ public final class Path {
 	public static final String PAGE_COURSES_POST = "/StudyPlace/Controller?command=getCourses";
 	public static final String PAGE_COURSE_POST = "/StudyPlace/Controller?command=getCourse";
 	public static final String PAGE_COURSE = "/view/jsp/course.jsp";
+	public static final String PAGE_CERTIFICATE = "/view/jsp/certificate.jsp";
 	public static final String PAGE_UPDATE_PROFILE_POST = "/StudyPlace/Controller?command=updateCourse";
 	public static final String PAGE_UPDATE_COURSE = "/view/jsp/update_course.jsp";
 	public static final String PAGE_ADD_PUBLICATION = "/view/jsp/addPublication.jsp";

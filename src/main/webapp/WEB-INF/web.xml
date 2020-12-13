@@ -57,11 +57,11 @@
 		<filter-class>web.controller.filter.CommandAccessFilter</filter-class>
 		<init-param>
 			<param-name>admin</param-name>
-			<param-value>addCourse openAddCourse</param-value>
+			<param-value>getCertificate getMyLearning getMyCourses addCourse openAddCourse</param-value>
 		</init-param>
 		<init-param>
 			<param-name>user</param-name>
-			<param-value>addCourse openAddCourse</param-value>
+			<param-value>getCertificate getMyLearning getMyCourses addCourse openAddCourse</param-value>
 		</init-param>
 		
 		<init-param>

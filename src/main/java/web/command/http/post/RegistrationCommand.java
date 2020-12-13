@@ -64,13 +64,14 @@ private static Logger LOG = Logger.getLogger(RegistrationCommand.class);
 		
 		user.setInfoId(null);
 		
-		registrServ.insertUser(user);
+		user = registrServ.insertUser(user);
 		LOG.trace("Insert in DB user --> " + user);
 		
 		
 		int methodMain = 2;
 		session.setAttribute("methodMain", methodMain);
 		session.setAttribute("user", user);
+		session.setAttribute("userRole", user.getRoleId());
 		LOG.trace("Set the session attribute: methodMain --> " + methodMain);
 		
 		LOG.debug("Commands finished");

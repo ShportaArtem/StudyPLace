@@ -15,8 +15,8 @@ public class SubscriptionRep {
 	
 	private static final String SQL_CREATE_SUBSCRIPTION = "INSERT INTO subscriptions VALUES (?, ?)";	
 	//private static final String SQL_COUNT_FOLLOWERS = "SELECT COUNT(*) FROM subscriptions WHERE courseid=?";
-	private static final String SQL_FIND_SUBSCRIPTION_BY_COURSE_ID = "SELECT * FROM subscriptions WHERE courseid=?";
-	//private static final String SQL_FIND_SUBSCRIPTION_BY_USER_ID = "SELECT * FROM subscriptions WHERE userid=? and courseid=";
+	private static final String SQL_FIND_SUBSCRIPTION_BY_COURSE_ID = "SELECT * FROM subscriptions WHERE CourseID=?";
+	private static final String SQL_FIND_SUBSCRIPTION_BY_USER_ID = "SELECT * FROM subscriptions WHERE UserID=?";
 	
 	public Subscription insertSubs(Connection con, Subscription subs) throws SQLException { 
 
@@ -55,6 +55,28 @@ public class SubscriptionRep {
 
 		try {
 			pstmt = con.prepareStatement(SQL_FIND_SUBSCRIPTION_BY_COURSE_ID);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				subs.add(extractSubscription(rs));
+			}
+			con.commit();
+		} finally {
+			DBUtils.close(rs);
+			DBUtils.close(pstmt);
+		}
+		return subs;
+	}
+	
+	public List<Subscription> findSubByUserId(Connection con, int id) throws SQLException {
+		List<Subscription> subs = new ArrayList<Subscription>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = con.prepareStatement(SQL_FIND_SUBSCRIPTION_BY_USER_ID);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 

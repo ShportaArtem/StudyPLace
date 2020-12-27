@@ -65,6 +65,11 @@ background:#14729D;
 		         	<a href="" class="btn btn-primary" type="submit" > unsubscribe </a>
 		         	<a href="/StudyPlace/Controller?command=getPublication&coursePosition=1" 
 		         	class="btn btn-primary" type="submit" >Start a course</a>
+		         	<c:choose>
+		         		<c:when test="${sessionScope.certificate != null}">
+		         			<a href="/StudyPlace/Controller?command=getCertificate&certificateId=${sessionScope.certificate.getId()}" class="btn btn-primary" type="submit" >Show Certificate</a>
+		         		</c:when>
+		         	</c:choose>
 		        </c:when>
 		        <c:otherwise>
 		        	<a href="/StudyPlace/Controller?command=subscribeCourse&courseId=${sessionScope.thisCourse.getId()}" class="btn btn-primary" type="submit" > subscribe </a>

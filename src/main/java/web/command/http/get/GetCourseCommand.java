@@ -11,12 +11,14 @@ import org.apache.log4j.Logger;
 
 import db.exception.AppException;
 import db.exception.DBException;
+import model.Certificate;
 import model.Comment;
 import model.Course;
 import model.Subscription;
 import model.User;
 import modelView.CommentView;
 import modelView.CourseView;
+import service.CertificateService;
 import service.CommentService;
 import service.CourseService;
 import service.ProfileService;
@@ -35,13 +37,15 @@ public class GetCourseCommand implements Command{
 	private CommentService commServ;
 	private ProfileService profileServ;
 	private SubscriptionService subServ;
+	private CertificateService certificateServ;
 	
-	public GetCourseCommand(CourseService coursesService, CommentService commServ, ProfileService profileServ, SubscriptionService subServ) {
+	public GetCourseCommand(CourseService coursesService, CommentService commServ, ProfileService profileServ, SubscriptionService subServ, CertificateService certificateServ) {
 		super();
 		this.coursesService = coursesService;
 		this.commServ = commServ;
 		this.profileServ = profileServ;
 		this.subServ = subServ;
+		this.certificateServ = certificateServ;
 	}
 	
 	@Override
@@ -109,8 +113,15 @@ public class GetCourseCommand implements Command{
 			}
 		}
 		thisCoursetView.setCountFollowers(k);
-		
+		System.out.println("I`M HERE" + thisUser.getId() + "___" + thisCourse.getId());
+		Certificate cert = certificateServ.getCertByCourseAndUser(thisUser, thisCourse);
+		if (cert != null)
+			System.out.println("cert" + cert.getMark());
+		else
+			System.out.println("cert is null");
 		CommandResult cr = new HttpCommandResult(RequestType.GET,  Path.PAGE_COURSE);
+		
+		session.setAttribute("certificate", cert);
 		session.setAttribute("thisCourse", thisCoursetView);
 		session.setAttribute("thisComments", thisCommentsView);
 		session.setAttribute("thisUser", thisUser);

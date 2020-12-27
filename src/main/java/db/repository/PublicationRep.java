@@ -18,6 +18,7 @@ public class PublicationRep {
 	private static final String SQL_FIND_ALL_PUBLICATIONS_BY_COURSE_ID = "SELECT * FROM publications WHERE courseid=?";
 	private static final String SQL_FIND_ALL_PUBLICATIONS = "SELECT * FROM publications";
 	private static final String SQL_FIND_PUBLICATION_BY_POSITION = "SELECT * FROM publications WHERE position=?";
+	private static final String SQL_FIND_PUBLICATION_BY_POSITION_AND_COURSE = "SELECT * FROM publications WHERE position=? and courseId=?";
 	//private static final String SQL_DELETE_COMMENT_BY_USER_ID = "DELETE FROM comments WHERE id=?";
 	/**
 	 * Returns all course.
@@ -120,6 +121,26 @@ public class PublicationRep {
 			}
 		return publication;
 	}
+	
+	public Publication findPublicationByPositionAndCourse(Connection con, int position, int courseId) throws SQLException {
+	    Publication publication = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    try {
+	      pstmt = con.prepareStatement(SQL_FIND_PUBLICATION_BY_POSITION_AND_COURSE);
+	      pstmt.setInt(1, position);
+	      pstmt.setInt(2, courseId);
+	      rs = pstmt.executeQuery();
+	      if (rs.next()) {
+	        publication = extractPublications(rs);
+	      }
+	    } finally {
+	          DBUtils.close(rs);
+	          DBUtils.close(pstmt);
+	        }
+	      
+	    return publication;
+	  }
 	
 }
 	

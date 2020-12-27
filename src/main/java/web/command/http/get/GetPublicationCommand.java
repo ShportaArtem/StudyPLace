@@ -51,37 +51,44 @@ public class GetPublicationCommand implements Command{
 		catch(Exception e){
 			coursePosition = (int) session.getAttribute("coursePosition");
 		}
+		
 		Course thisCourse = coursesService.findCourseById(courseId);
-		Publication publication = coursesService.findPublicationByPosition(coursePosition);
+		
 		Publication publicationNow;
-		boolean hasMaterial;
-		if(publication.getCourseID()==courseId) {
-			publicationNow = coursesService.findPublicationByPosition(coursePosition);
+		boolean hasMaterial = false;
+		try {
+			publicationNow = coursesService.findPublicationByPositionAndCourse(coursePosition,courseId);
 			hasMaterial = true;
 		}
-		else {
+		catch(Exception e){
 			publicationNow = null;
 			hasMaterial=false;
 		}
+		
 		boolean hasPrevious;
-		if(coursesService.findPublicationByPosition(coursePosition-1)!=null) {
+		if(coursesService.findPublicationByPositionAndCourse(coursePosition-1,courseId)!=null) {
 			hasPrevious = true;
 		}
 		else {
 			hasPrevious = false;
 		}
 		boolean hasNextTask = false;
-		if(coursesService.findTaskByPublicationId(publicationNow.getId())!=null) {
-			hasNextTask = true;
+		try {
+			if(coursesService.findTaskByPublicationId(publicationNow.getId())!=null) {
+				hasNextTask = true;
+			}
+		} catch (Exception e) {
+			
 		}
+		
 		boolean hasNext;
-		if(coursesService.findPublicationByPosition(coursePosition+1)!=null) {
+		if(coursesService.findPublicationByPositionAndCourse(coursePosition+1,courseId)!=null) {
 			hasNext = true;
 		}
 		else {
 			hasNext = false;
 		}
-		
+		System.out.print(hasMaterial);
 		CommandResult cr = new HttpCommandResult(RequestType.GET,  Path.PAGE_PUBLICATION);
 		session.setAttribute("publicationNow", publicationNow);
 		session.setAttribute("courseId", courseId);

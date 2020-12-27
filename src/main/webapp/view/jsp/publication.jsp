@@ -29,42 +29,42 @@
 							<div class="card-body">
 								<h2 class="card-title">${sessionScope.publicationNow.getName()}</h2>
 								<p class="card-text">${sessionScope.publicationNow.getDescription()}</p>
+								
 								<c:choose>
 									<c:when test="${sessionScope.hasPrevious.equals(true)}">
-										<a
-											href="/StudyPlace/Controller?command=getPublication&coursePosition=${publicationNow.getPosition()-1}"
-											class="btn btn-primary" type="submit">Previous </a>
+										<a href="/StudyPlace/Controller?command=getPublication&coursePosition=${publicationNow.getPosition()-1}"
+											class="btn btn-primary" type="submit">Previous publication</a>
 									</c:when>
 								</c:choose>
+								
 								<c:choose>
 									<c:when test="${sessionScope.hasNextTask.equals(true)}">
 										<a href="/StudyPlace/Controller?command=getTask"
-											class="btn btn-primary" type="submit">Next </a>
+											class="btn btn-primary" type="submit">Task for this publication</a>
 									</c:when>
-									<c:otherwise>
+									<c:when test="${sessionScope.hasNext.equals(true)}">
+											<a href="/StudyPlace/Controller?command=getPublication&coursePosition=${publicationNow.getPosition()+1}"
+													class="btn btn-primary" type="submit">Next Publication</a>
+									</c:when>
+								</c:choose>
+								
+								<c:choose>
+									<c:when test="${sessionScope.thisCourse.getTeacherId().equals(sessionScope.user.getId())}">
 										<c:choose>
-											<c:when test="${sessionScope.hasNext.equals(true)}">
-												<a
-													href="/StudyPlace/Controller?command=getPublication&coursePosition=${publicationNow.getPosition()+1}"
-													class="btn btn-primary" type="submit">Next </a>
+											<c:when test="${sessionScope.hasNext.equals(false)}">
+											<a href="/StudyPlace/Controller?command=getAddPublication&courseId=${sessionScope.thisCourse.getId()}"
+												class="btn btn-primary" type="submit">Add new publication</a>
 											</c:when>
 										</c:choose>
-									</c:otherwise>
-									</c:choose>
-									<c:choose>
-									<c:when
-										test="${sessionScope.thisCourse.getTeacherId().equals(sessionScope.user.getId())}">
-										<a
-											href="/StudyPlace/Controller?command=getAddPublication&courseId=${sessionScope.thisCourse.getId()}"
-											class="btn btn-primary" type="submit">Add new
-											publication</a>
+										
 										<c:choose>
 											<c:when test="${sessionScope.hasNextTask.equals(false)}">
 												<a href="/StudyPlace/Controller?command=openAddTask"
-													class="btn btn-primary" type="submit">Add task</a>
+													class="btn btn-primary" type="submit">Add task for this publication</a>
 											</c:when>
-		         		</c:choose>
+		         						</c:choose>
 									</c:when>
+									
 									<c:otherwise>
 										<a href="/StudyPlace/Controller?command=getCourse"
 											class="btn btn-primary" type="submit">Finish </a>
@@ -78,8 +78,8 @@
 						</div>
 					</c:when>
 					<c:otherwise>
-        No material
-        </c:otherwise>
+				        No material
+				    </c:otherwise>
 				</c:choose>
 
 

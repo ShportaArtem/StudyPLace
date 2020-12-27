@@ -15,12 +15,15 @@ import db.repository.CourseRep;
 import db.repository.PublicationRep;
 import db.repository.QuestionRep;
 import db.repository.TaskRep;
+import db.repository.UserAnswerRep;
 import db.utils.DBUtils;
 import model.AnswerForQuestion;
 import model.Course;
 import model.Publication;
 import model.Question;
 import model.Task;
+import model.User;
+import model.UserAnswer;
 
 public class CourseService {
 	private static final Logger LOG = Logger.getLogger(CourseService.class);
@@ -31,16 +34,18 @@ public class CourseService {
 	private QuestionRep questionRep;
 	private AnswerForQuestionRep answerForQuestionRep;
 	private PublicationRep publicationRep;
+	private UserAnswerRep userAnswerRep;
 	
 	public CourseService(DBManager dbManager, CourseRep courseRep, TaskRep taskRep, QuestionRep questionRep,
-			AnswerForQuestionRep answerForQuestionRep, PublicationRep publicationRep) {
+			AnswerForQuestionRep answerForQuestionRep, PublicationRep publicationRep, UserAnswerRep userAnswerRep) {
 		super();
 		this.dbManager = dbManager;
 		this.courseRep = courseRep;
 		this.taskRep = taskRep;
 		this.questionRep = questionRep;
 		this.answerForQuestionRep = answerForQuestionRep;
-		this.publicationRep= publicationRep;
+		this.publicationRep = publicationRep;
+		this.userAnswerRep = userAnswerRep;
 	}
 
 	public Course insertCourse(Course course) throws AppException {
@@ -88,6 +93,21 @@ public class CourseService {
 		return question;
 	}
 	
+	public UserAnswer insertUserAnswer(UserAnswer userAnswer) throws AppException {
+		Connection con=null;
+		try {
+			con = dbManager.getConnection();
+			con.setAutoCommit(true);
+			userAnswer = userAnswerRep.insertUserAnswer(con, userAnswer);
+		} catch (SQLException ex) {
+			LOG.error(Messages.ERR_CANNOT_INSERT_QUESTION, ex);
+			throw new DBException(Messages.ERR_CANNOT_INSERT_QUESTION, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return userAnswer;
+	}
+	
 	public List<Question> findQuestionsByTaskId(int id) throws AppException{
 		List<Question> questions = null;
 		Connection con=null;
@@ -126,6 +146,23 @@ public class CourseService {
 		try {
 			con = dbManager.getConnection();
 			answers = answerForQuestionRep.findAllAnswers(con);
+			con.commit();
+		} catch (SQLException ex) {
+			DBUtils.rollback(con);
+			LOG.error(Messages.ERR_CANNOT_OBTAIN_ANSWERS, ex);
+			throw new DBException(Messages.ERR_CANNOT_OBTAIN_ANSWERS, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return answers;
+	}
+	
+	public List<AnswerForQuestion> findAnswerForQuestionsByTaskId(int taskId) throws AppException{
+		List<AnswerForQuestion> answers = null;
+		Connection con=null;
+		try {
+			con = dbManager.getConnection();
+			answers = answerForQuestionRep.findAnswerForQuestionsByTaskId(con, taskId);
 			con.commit();
 		} catch (SQLException ex) {
 			DBUtils.rollback(con);
@@ -270,6 +307,23 @@ public class CourseService {
 		return publication;
 	}
 	
+	public Publication findPublicationByPositionAndCourse(int position, int courseId) throws AppException {
+	    Publication publication = null;
+	    Connection con=null;
+	    try {
+	      con = dbManager.getConnection();
+	      publication = publicationRep.findPublicationByPositionAndCourse(con, position, courseId);
+	      con.commit();
+	    } catch (SQLException ex) {
+	      DBUtils.rollback(con);
+	      LOG.error(Messages.ERR_CANNOT_OBTAIN_COURSE_BY_ID, ex);
+	      throw new DBException(Messages.ERR_CANNOT_OBTAIN_COURSE_BY_ID, ex);
+	    } finally {
+	      DBUtils.close(con);
+	    }
+	    return publication;
+	  }
+	
 	public Publication findPublicationByPosition(int id) throws AppException {
 		Publication publication = null;
 		Connection con=null;
@@ -285,5 +339,113 @@ public class CourseService {
 			DBUtils.close(con);
 		}
 		return publication;
+	}
+	
+	public List<UserAnswer> findUserAnswersByUserIdTaskId(int userId, int taskId) throws AppException{
+		List<UserAnswer> answers = null;
+		Connection con=null;
+		try {
+			con = dbManager.getConnection();
+			answers = UserAnswerRep.findUserAnswerByUserIdTaskId(con, userId, taskId);
+			con.commit();
+		} catch (SQLException ex) {
+			DBUtils.rollback(con);
+			LOG.error(Messages.ERR_CANNOT_OBTAIN_ANSWERS, ex);
+			throw new DBException(Messages.ERR_CANNOT_OBTAIN_ANSWERS, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return answers;
+	}
+	
+	public Question GetQuestionById(List<Question> questions, int id)
+	{
+		for (Question question: questions)
+		{
+			if (question.getId() == id)
+			{
+				return question;
+			}
+		}
+		return null;
+	}
+	
+	public int markForTask(Task task, User user) throws AppException
+	{
+		List<AnswerForQuestion> answers = findAnswerForQuestionsByTaskId(task.getId());
+		List<UserAnswer> uAnswers = findUserAnswersByUserIdTaskId(user.getId(), task.getId());
+		List<Question> questions = findQuestionsByTaskId(task.getId());
+		
+		int question = answers.get(0).getQuestionId(), mark = 0, count = 0;
+		boolean correct = true, done = false;
+		for (AnswerForQuestion ans: answers)
+		{
+			if (ans.getQuestionId() != question)
+			{
+				question = ans.getQuestionId();
+				if (correct && count != 0)
+				{
+					mark += GetQuestionById(questions, question).getMark();
+				}
+				correct = true;
+				count = 0;
+			}
+			for (UserAnswer uAns: uAnswers)
+			{
+				if (ans.getId() == uAns.getAnswerForQuestionId())
+				{
+					if (!ans.isCorrect())
+					{
+						correct = false;
+					}
+					++count;
+					done = true;
+				}
+			}
+		}
+		if (correct && count != 0)
+		{
+			mark += GetQuestionById(questions, question).getMark();
+		}
+		if (!done)
+		{
+			return -1;
+		}
+		return mark;
+	}
+	
+	public int maxMarkForTask(Task task) throws AppException
+	{
+		List<AnswerForQuestion> answers = findAnswerForQuestionsByTaskId(task.getId());
+		List<Question> questions = findQuestionsByTaskId(task.getId());
+		
+		int question = answers.get(0).getQuestionId(), maxMark = GetQuestionById(questions, question).getMark();
+		for (AnswerForQuestion ans: answers)
+		{
+			if (ans.getQuestionId() != question)
+			{
+				question = ans.getQuestionId();
+				maxMark += GetQuestionById(questions, question).getMark();
+			}
+		}
+		return maxMark;
+	}
+	
+	public List<Task> getTasksByCourse(Course course) throws DBException
+	{
+		List<Task> tasks = null;
+		Connection con = null;
+		try {
+			con = dbManager.getConnection();
+			tasks = taskRep.getTasksByCourseId(con, course.getId());
+			con.commit();
+		} catch (SQLException ex) {
+			DBUtils.rollback(con);
+			LOG.error(Messages.ERR_CANNOT_OBTAIN_COMMENTS, ex);
+			throw new DBException(Messages.ERR_CANNOT_OBTAIN_COMMENTS, ex);
+		} finally {
+			DBUtils.close(con);
+		}
+		return tasks;
 	}
 }

@@ -11,16 +11,18 @@
       <div class="col-lg-12">
             <div class="card h-100">
               
-              <div class="card-body">
-                <h4 class="card-title" style="text-transform: capitalize;">
+              <div class="card-body" style="background-color: #F5EFE5">
+              	<h1 style="text-align:center; font-size: 64px; color: #083A63">Certificate</h1>
+                <h4 class="card-title" style="text-transform: capitalize; text-align:center; margin-bottom: 50px; color: #14729D">
                 Course: ${certificateView.getNameCourse()}
                 </h4>
+                <h3 class="card-title" style="text-align:center; margin-bottom: 50px; color: #083A63">
+                ${certificateView.getNameUser()} ${certificateView.getSurnameUser()} ended this course
+                </h3>
+                <h4 class="card-title" style="text-align:center; color: #083A63">
+                And got an ${certificateView.getMark()} out of 100 points.
+                </h4>
               </div>
-                 <ul class="list-group list-group-flush">
-    				<li class="list-group-item">User name: ${certificateView.getNameUser()}</li>
-    				<li class="list-group-item">User surname: ${certificateView.getSurnameUser()}</li>
-    				<li class="list-group-item">Mark: ${certificateView.getMark()}</li>
-  				</ul>
             </div>
           	
           	<div class="form-group">

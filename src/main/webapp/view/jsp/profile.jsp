@@ -134,7 +134,25 @@ background:#14729D;
 
                                     </div>
                                     <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
-                                        Place for certificates.
+                                        
+                                        <c:forEach var="cert" items="${sessionScope.certificates}">
+									          <div class="col-lg-4 col-md-6 mb-4" style="margin-bottom: 20px; max-width: 100%;">
+									            <div class="card h-100">
+									              <div class="card-body" style="background-color: #F5EFE5">
+									              	<h1 style="text-align:center; font-size: 64px; color: #083A63">Certificate</h1>
+									                <h4 class="card-title" style="text-transform: capitalize; text-align:center; margin-bottom: 50px; color: #14729D">
+									                Course: ${cert.getNameCourse()}
+									                </h4>
+									                <h3 class="card-title" style="text-align:center; margin-bottom: 50px; color: #083A63">
+									                ${cert.getNameUser()} ${cert.getSurnameUser()} ended this course
+									                </h3>
+									                <h4 class="card-title" style="text-align:center; color: #083A63">
+									                And got an ${cert.getMark()} out of 100 points.
+									                </h4>
+									              </div>
+									            </div>
+									          </div>
+								          </c:forEach>
                                     </div>
                                 </div>
                             </div>

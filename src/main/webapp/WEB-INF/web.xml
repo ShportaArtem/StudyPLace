@@ -73,7 +73,7 @@
 			<param-value>openAddQuestion openAddTask getTask addTask addQuestion login getUpdateCourse getRegistration getSignIn registration getProfile 
 			updateProfile getUpdateProfile getMain getCourses getCourse leaveComment searchCourses 
 			logout addCourse openAddCourse subscribeCourse updateCourse addPublication getAddPublication
-			getPublications getPublication</param-value>
+			getPublications getPublication endTask</param-value>
 		</init-param>
 	</filter>
 	

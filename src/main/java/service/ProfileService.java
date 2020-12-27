@@ -12,6 +12,8 @@ import db.exception.Messages;
 import db.repository.UserInfoRep;
 import db.repository.UserRep;
 import db.utils.DBUtils;
+import model.Certificate;
+import model.Course;
 import model.User;
 import model.UserInfo;
 
@@ -127,6 +129,4 @@ public class ProfileService {
 		}
 		return userInfo;
 	}
-
-	
 }

@@ -15,6 +15,7 @@ public class AnswerForQuestionRep {
 	
 	private static final String SQL_CREATE_ANSWER_FOR_QUESION = "INSERT INTO answersforquestions VALUES (DEFAULT, ?, ?, ?)";
 	private static final String SQL_FIND_ALL_ANSWERS="SELECT * FROM answersforquestions";
+	private static final String SQL_FIND_ANSWERS_BY_TASK_ID="SELECT answersforquestions.* FROM answersforquestions, questions, tasks WHERE answersforquestions.QuestionID=questions.ID AND questions.TaskID = tasks.ID AND tasks.ID=?";
 	
 	public List<AnswerForQuestion> findAllAnswers(Connection con) throws SQLException {
 		List<AnswerForQuestion> answers = new ArrayList<>();
@@ -32,6 +33,27 @@ public class AnswerForQuestionRep {
 		} finally {
 			DBUtils.close(rs);
 			DBUtils.close(stmt);
+		}
+		return answers;
+	}
+	
+	public List<AnswerForQuestion> findAnswerForQuestionsByTaskId(Connection con, int taskId) throws SQLException {
+		List<AnswerForQuestion> answers = new ArrayList<>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = con.prepareStatement(SQL_FIND_ANSWERS_BY_TASK_ID);
+			pstmt.setInt(1, taskId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				answers.add(extractAnswer(rs));
+			}
+		} finally {
+			DBUtils.close(rs);
+			DBUtils.close(pstmt);
 		}
 		return answers;
 	}

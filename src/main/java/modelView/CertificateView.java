@@ -37,6 +37,4 @@ public class CertificateView {
 	public void setNameCourse(String nameCourse) {
 		this.nameCourse = nameCourse;
 	}
-	
-	
 }
